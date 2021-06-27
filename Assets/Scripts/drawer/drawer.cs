@@ -13,7 +13,7 @@ public class drawer : MonoBehaviour
 
     private Vector3 NewPos, OldPos;//零時座標變數 New & Old
     public int width = 1;//調整寬度
-    public int Select = 0;//選擇頭髮style
+    public int Select = 1;//選擇頭髮style
 
     public MeshGenerate CreateHair;
     public PositionGenerate CreatePosition;
@@ -68,7 +68,7 @@ public class drawer : MonoBehaviour
             if (dist > 0.05f)
             {
                 CreatePosition = Hairmodel.GetComponent<PositionGenerate>();
-                CreatePosition.PosGenerate(NewPos, OldPos, width, PointPos, Select, count);
+                CreatePosition.PosGenerate(NewPos, OldPos, width, PointPos, Select);
                 OldPos = NewPos = attachPoint.transform.position;
 
             }
@@ -111,7 +111,7 @@ public class drawer : MonoBehaviour
 
     }
 
-    /*public void controlMesh()//髮片控制 clear undo redo color 
+    public void controlMesh()//髮片控制 clear undo redo color 
     {
         CreateHair = Hairmodel.GetComponent<MeshGenerate>();
         if(PanelMain.icon == 1)
@@ -148,49 +148,6 @@ public class drawer : MonoBehaviour
             
         }
 
-    }*/
-
-    public void controlMesh()//髮片控制 clear undo redo color 
-    {
-        CreateHair = Hairmodel.GetComponent<MeshGenerate>();
-        if (Input.GetKeyDown("c"))
-        {
-            CreateHair.ClearMesh(count);
-            CopyCount = count;
-            count = 0;
-            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
-        }
-
-        if (Input.GetKeyDown("u"))
-        {
-            CreateHair.undoMesh(count);
-            if (count == 0) count = CopyCount;
-            else count--;
-            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
-        }
-
-        if (CopyCount > count) clickUndo = 1;
-        else clickUndo = 0;
-
-        if (Input.GetKeyDown("r") && clickUndo == 1)
-        {
-            CreateHair.redoMesh();
-            count++;
-            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
-
-        }
-
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            Vector3 RemovePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30.0f));
-            //CreateHair.RemoveMesh(RemovePos);
-        }
-
-        //if (Input.GetKeyDown("3")) colorSelect = 1;
-        //if (Input.GetKeyDown("4")) colorSelect = 2;
-
     }
-
 
 }
