@@ -16,6 +16,11 @@ public class PanelMain : MonoBehaviour
         UIManager.Instance.ClosePanel("RPanel_Paint");
         UIManager.Instance.ShowPanel("RPanel_Color");
     }
+    public void SlideClick()
+    {
+
+    }
+
     public void ClearIconClick()
     {
         icon = 3;
@@ -33,11 +38,13 @@ public class PanelMain : MonoBehaviour
         icon = 5;
         UIManager.Instance.ClosePanel("RPanel_Paint");
         UIManager.Instance.ClosePanel("RPanel_Color");
+        
     }
     public void RedoIconClick()
     {
         icon = 6;
         UIManager.Instance.ClosePanel("RPanel_Paint");
         UIManager.Instance.ClosePanel("RPanel_Color");
+        
     }
 }

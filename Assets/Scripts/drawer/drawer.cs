@@ -52,6 +52,7 @@ public class drawer : MonoBehaviour
     {
         controlWidth();
         controlMesh();
+        
         if (down == 0) //沒按下
         {
             if (TriggerClick.GetStateDown(Pose.inputSource) && PanelMain.icon ==1)
@@ -88,7 +89,9 @@ public class drawer : MonoBehaviour
                 down = 0;
                 
             }
+            
         }
+
     }
 
     public void controlWidth()//寬度&髮片風格設定 
@@ -108,13 +111,12 @@ public class drawer : MonoBehaviour
 
     }
 
-    public void controlMesh()//髮片控制 clear undo redo color 
+    /*public void controlMesh()//髮片控制 clear undo redo color 
     {
         CreateHair = Hairmodel.GetComponent<MeshGenerate>();
         if(PanelMain.icon == 1)
         {
-            //GameObject.Find("RightHand").GetComponent<drawer>().enabled = true;
-            Debug.Log(PanelMain.icon);
+            
         }
         if (PanelMain.icon == 3) // Clear button 被按下了
         {
@@ -122,9 +124,44 @@ public class drawer : MonoBehaviour
             CopyCount = count;
             count = 0;
             CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
+           
         }
 
         if (PanelMain.icon == 5) // Undo 被按下
+        {
+            
+            CreateHair.undoMesh(count);
+            if (count == 0) count = CopyCount;
+            else count--;
+            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
+        }
+        
+
+        if (CopyCount > count) clickUndo = 1;
+        else clickUndo = 0;
+
+        if (PanelMain.icon ==6 && clickUndo==1) //Redo 被按下
+        {
+            CreateHair.redoMesh();
+            count++;
+            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
+            
+        }
+
+    }*/
+
+    public void controlMesh()//髮片控制 clear undo redo color 
+    {
+        CreateHair = Hairmodel.GetComponent<MeshGenerate>();
+        if (Input.GetKeyDown("c"))
+        {
+            CreateHair.ClearMesh(count);
+            CopyCount = count;
+            count = 0;
+            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
+        }
+
+        if (Input.GetKeyDown("u"))
         {
             CreateHair.undoMesh(count);
             if (count == 0) count = CopyCount;
@@ -135,14 +172,25 @@ public class drawer : MonoBehaviour
         if (CopyCount > count) clickUndo = 1;
         else clickUndo = 0;
 
-        if (PanelMain.icon ==6 && clickUndo==1) //Redo 被按下
+        if (Input.GetKeyDown("r") && clickUndo == 1)
         {
             CreateHair.redoMesh();
             count++;
             CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
+
         }
 
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector3 RemovePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 30.0f));
+            //CreateHair.RemoveMesh(RemovePos);
+        }
+
+        //if (Input.GetKeyDown("3")) colorSelect = 1;
+        //if (Input.GetKeyDown("4")) colorSelect = 2;
+
     }
-    
+
 
 }
