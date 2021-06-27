@@ -1,3 +1,2 @@
 # haircreater
-
-## VR Hair Creater - VR髮型設計1
+## VR Hair Creater - VR髮型設計
