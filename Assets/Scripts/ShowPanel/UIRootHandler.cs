@@ -17,10 +17,14 @@ public class UIRootHandler : MonoBehaviour
     }
     private void Update()
     {
-        if(PanelMain.icon == 1)
+        if(PanelMain.icon == 1 || PanelMain.icon ==2)
         {
             rect.sizeDelta = new Vector2(800, 400);
-        }        
+        }
+        else
+        {
+            rect.sizeDelta = new Vector2(400, 400);
+        }
     }
 
 }

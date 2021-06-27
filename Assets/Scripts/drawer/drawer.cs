@@ -15,7 +15,7 @@ public class drawer : MonoBehaviour
     public int width = 1;//調整寬度
     public int Select = 0;//選擇頭髮style
 
-    public MeshGenerate CreatHair;
+    public MeshGenerate CreateHair;
     public PositionGenerate CreatePosition;
 
     public SteamVR_Action_Boolean TriggerClick;//板機鍵按鈕
@@ -24,14 +24,14 @@ public class drawer : MonoBehaviour
     public SteamVR_Action_Boolean spawn = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
 
     int down = 0;//滑鼠判定
-    int CopyCount = 0; //count
-    int tempCount;
-    int clearMesh = 0;
-    int clickUndo = 0;
+    public int count = 0; //紀錄有幾片髮片
+    int CopyCount = 0; //備份count
+    int clearMesh = 0; //
+    int clickUndo = 0; //確定是否有做undo，幾次
 
 
     GameObject Hairmodel;
-    public int count = 0;
+    
     public Rigidbody attachPoint;//rigidbody
 
     private void Awake()
@@ -42,7 +42,7 @@ public class drawer : MonoBehaviour
     {
         Hairmodel = new GameObject();
         Hairmodel.name = "HairModel";
-        CreatHair = Hairmodel.AddComponent<MeshGenerate>();
+        CreateHair = Hairmodel.AddComponent<MeshGenerate>();
         CreatePosition = Hairmodel.AddComponent<PositionGenerate>();
         Debug.Log("按Space 設定寬度");
     }
@@ -74,8 +74,8 @@ public class drawer : MonoBehaviour
             if(PointPos.Count >= (3 + (width - 1) * 2) * 3)
                 {
                 //if(Hairmodel.GetComponent<MeshGenerate>() == null) CreatHair = Hairmodel.AddComponent<MeshGenerate>();//判斷是否已經存在組件(MeshGenerate.cs)
-                CreatHair = Hairmodel.GetComponent<MeshGenerate>();
-                CreatHair.meshGenerate(count, width, UpdatePoint,TriggerClick);//呼叫MeshGenerate.cs中的meshGenerate函式
+                CreateHair = Hairmodel.GetComponent<MeshGenerate>();
+                CreateHair.meshGenerate(count, width, UpdatePoint,TriggerClick, Hairmodel);//呼叫MeshGenerate.cs中的meshGenerate函式
 
             }
             if (TriggerClick.GetStateUp(Pose.inputSource))
@@ -84,8 +84,9 @@ public class drawer : MonoBehaviour
                 PointPos.Clear();
                 LenPoint.Clear();
                 UpdatePoint.Clear();
+                CopyCount = count;
                 down = 0;
-
+                
             }
         }
     }
@@ -109,7 +110,7 @@ public class drawer : MonoBehaviour
 
     public void controlMesh()//髮片控制 clear undo redo color 
     {
-        CreatHair = Hairmodel.GetComponent<MeshGenerate>();
+        CreateHair = Hairmodel.GetComponent<MeshGenerate>();
         if(PanelMain.icon == 1)
         {
             //GameObject.Find("RightHand").GetComponent<drawer>().enabled = true;
@@ -117,16 +118,28 @@ public class drawer : MonoBehaviour
         }
         if (PanelMain.icon == 3) // Clear button 被按下了
         {
-            Debug.Log(PanelMain.icon);
+            CreateHair.ClearMesh(count);
+            CopyCount = count;
+            count = 0;
+            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
         }
 
         if (PanelMain.icon == 5) // Undo 被按下
         {
-            Debug.Log(PanelMain.icon);
+            CreateHair.undoMesh(count);
+            if (count == 0) count = CopyCount;
+            else count--;
+            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
         }
-        if (PanelMain.icon ==6 ) //Redo 被按下
+
+        if (CopyCount > count) clickUndo = 1;
+        else clickUndo = 0;
+
+        if (PanelMain.icon ==6 && clickUndo==1) //Redo 被按下
         {
-            Debug.Log(PanelMain.icon);
+            CreateHair.redoMesh();
+            count++;
+            CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
         }
 
     }
