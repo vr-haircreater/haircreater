@@ -129,7 +129,7 @@ public class PositionGenerate : MonoBehaviour
                     tempPoint.Add(GetLenPoint[i]);
                     x++;
                 }
-                w = 0.05f;
+                w = 0.005f;
 
             }
             else
@@ -152,9 +152,9 @@ public class PositionGenerate : MonoBehaviour
                     tempPoint.Add(temp);
                 }
 
-                if (w < width && i < GetLenPoint.Count / 2) w += 0.15f;//作為可調參數
-                else if (i >= GetLenPoint.Count / 2 + 2) w -= 0.15f;
-                else if (w < 0.15f) w = 0.05f;
+                if (w < width && i < GetLenPoint.Count / 2) w += 0.015f;//作為可調參數
+                else if (i >= GetLenPoint.Count / 2 + 2) w -= 0.015f;
+                else if (w < 0.015f) w = 0.005f;
 
                 // Debug.Log(w);
 

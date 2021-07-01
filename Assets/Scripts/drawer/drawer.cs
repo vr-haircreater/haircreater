@@ -64,8 +64,8 @@ public class drawer : MonoBehaviour
         if (down == 1) //按下
         {
             NewPos = attachPoint.transform.position;
-            float dist = Vector3.Distance(OldPos, NewPos);
-            if (dist > 0.05f)
+            float dist = Vector3.Distance(NewPos, OldPos);
+            if (dist > 0.02f)
             {
                 CreatePosition = Hairmodel.GetComponent<PositionGenerate>();
                 CreatePosition.PosGenerate(NewPos, OldPos, width, PointPos, Select);
@@ -124,7 +124,7 @@ public class drawer : MonoBehaviour
             CopyCount = count;
             count = 0;
             CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
-           
+            PanelMain.icon = 0;
         }
 
         if (PanelMain.icon == 5) // Undo 被按下
@@ -134,6 +134,7 @@ public class drawer : MonoBehaviour
             if (count == 0) count = CopyCount;
             else count--;
             CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
+            PanelMain.icon = 0;
         }
         
 
@@ -145,7 +146,8 @@ public class drawer : MonoBehaviour
             CreateHair.redoMesh();
             count++;
             CreateHair.meshGenerate(count, width, UpdatePoint, TriggerClick, Hairmodel);
-            
+            PanelMain.icon = 0;
+
         }
 
     }

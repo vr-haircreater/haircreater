@@ -33,7 +33,7 @@ public class MeshGenerate : MonoBehaviour
     public List<int> tempVerticeBox = new List<int>();
     public List<int> tempTriangleBox = new List<int>();
 
-    //輩分座標
+    //備份座標
     public List<Vector3> oldVerticePos = new List<Vector3>();
     public List<int> oldTrianglePos = new List<int>();
 
@@ -65,7 +65,7 @@ public class MeshGenerate : MonoBehaviour
 
 
         hairColor = GetComponent<Renderer>().material;
-        hairColor.color = Color.red;
+        hairColor.color = Color.blue;
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         GetComponent<MeshRenderer>().material = hairColor;
         mesh.name = "Hair Grid";
@@ -127,7 +127,7 @@ public class MeshGenerate : MonoBehaviour
         oldTriangle = triangles.Length;
 
         //收集長度&舊的位置
-        RecordValue(oldVertice, oldTriangle, mesh.vertices, mesh.triangles, TriggerClick1);
+        RecordValue(oldVertice, oldTriangle, mesh.vertices, mesh.triangles, TriggerClick1,count);
 
     }
 
@@ -143,7 +143,7 @@ public class MeshGenerate : MonoBehaviour
     }
 
 
-    public void RecordValue(int verticeLength, int triangleLength, Vector3[] verticePos, int[] trianglePos, SteamVR_Action_Boolean TriggerClick2)
+    public void RecordValue(int verticeLength, int triangleLength, Vector3[] verticePos, int[] trianglePos, SteamVR_Action_Boolean TriggerClick2,int count)
     {
 
         if (TriggerClick2.GetStateUp(drawer.Pose.inputSource))
@@ -157,7 +157,13 @@ public class MeshGenerate : MonoBehaviour
             oldVerticePos.AddRange(verticePos);//重新新增上去
             oldTrianglePos.AddRange(trianglePos);
 
+            if (count == 0) VerticeTotal.Add(verticeBox[count + 1]);
+            else VerticeTotal.Add(verticeBox[count + 1] - verticeBox[count]);
+            if (count == 0) TriangleTotal.Add(triangleBox[count + 1]);
+            else TriangleTotal.Add(triangleBox[count + 1] - triangleBox[count]);
+
         }
+
 
     }
 
@@ -198,8 +204,6 @@ public class MeshGenerate : MonoBehaviour
         if (count == 0)
         {
             //推回去
-            int LastUndoVIndex = undoSortVertice.Count - 1;
-            int LastUndoTIndex = undoSortTriangle.Count - 1;
 
             int Lastindex = tempVerticeBox.Count - tempcount;
 
@@ -224,7 +228,6 @@ public class MeshGenerate : MonoBehaviour
 
             verticeBox.AddRange(tempVerticeBox.GetRange(Lastindex, tempcount));
             triangleBox.AddRange(tempTriangleBox.GetRange(Lastindex, tempcount));
-
             VerticeTotal.AddRange(tempVerticeTotal.GetRange(Lastindex, tempcount));
             TriangleTotal.AddRange(tempTriangleTotal.GetRange(Lastindex, tempcount));
 
