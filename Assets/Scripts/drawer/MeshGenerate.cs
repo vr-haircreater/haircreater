@@ -8,7 +8,7 @@ using Valve.VR;
 public class MeshGenerate : MonoBehaviour
 {
     private Mesh mesh;
-    private Material hairColor;
+    public static Material hairColor;
 
     //裝mesh基本設定的陣列
     Vector3[] vertice;
@@ -65,7 +65,7 @@ public class MeshGenerate : MonoBehaviour
 
 
         hairColor = GetComponent<Renderer>().material;
-        hairColor.color = Color.blue;
+        hairColor.color = Color.blue; // 預設值
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         GetComponent<MeshRenderer>().material = hairColor;
         mesh.name = "Hair Grid";

@@ -1417,6 +1417,8 @@ MonoBehaviour:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
   count: 0
+  HairTexture: {fileID: 2800000, guid: d24f7092eae0bcf49ba420565c89ffbd, type: 3}
+  hairnormal: {fileID: 2800000, guid: 2fd1986cbdc69864e9a6b5c86aaf2527, type: 3}
   attachPoint: {fileID: 1088552849}
 --- !u!114 &786311342
 MonoBehaviour:

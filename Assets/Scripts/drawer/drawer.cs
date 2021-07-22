@@ -29,7 +29,7 @@ public class drawer : MonoBehaviour
     int clearMesh = 0; //
     int clickUndo = 0; //確定是否有做undo，幾次
 
-
+    public Texture HairTexture,hairnormal;
     GameObject Hairmodel;
     
     public Rigidbody attachPoint;//rigidbody
@@ -45,6 +45,7 @@ public class drawer : MonoBehaviour
         CreateHair = Hairmodel.AddComponent<MeshGenerate>();
         CreatePosition = Hairmodel.AddComponent<PositionGenerate>();
         Debug.Log("按Space 設定寬度");
+        
     }
 
     // Update is called once per frame
@@ -77,7 +78,8 @@ public class drawer : MonoBehaviour
                 //if(Hairmodel.GetComponent<MeshGenerate>() == null) CreatHair = Hairmodel.AddComponent<MeshGenerate>();//判斷是否已經存在組件(MeshGenerate.cs)
                 CreateHair = Hairmodel.GetComponent<MeshGenerate>();
                 CreateHair.meshGenerate(count, width, UpdatePoint,TriggerClick, Hairmodel);//呼叫MeshGenerate.cs中的meshGenerate函式
-
+                MeshGenerate.hairColor.SetTexture("_MainTex", HairTexture);
+                MeshGenerate.hairColor.SetTexture("_BumpMap", hairnormal);
             }
             if (TriggerClick.GetStateUp(Pose.inputSource))
             {
