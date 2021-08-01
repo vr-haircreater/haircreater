@@ -13,8 +13,6 @@ public class MeshGenerate : MonoBehaviour
     Vector4[] tangents;
     int[] triangle;
 
-    int OldVerticeCount = 0;
-    int OldTriangleCount = 0;
 
     public void GenerateMesh(List<Vector3> GetPointPos, int Getwidth)
     {
@@ -27,11 +25,11 @@ public class MeshGenerate : MonoBehaviour
         GetComponent<MeshRenderer>().material = GethairColor;
         mesh.name = "HairModel";
 
-        vertice = new Vector3[GetPointPos.Count + OldVerticeCount];
-        uv = new Vector2[GetPointPos.Count + OldVerticeCount];
-        tangents = new Vector4[GetPointPos.Count + OldVerticeCount];
+        vertice = new Vector3[GetPointPos.Count];
+        uv = new Vector2[GetPointPos.Count];
+        tangents = new Vector4[GetPointPos.Count];
 
-        for (int i = OldVerticeCount, j = 0; i < GetPointPos.Count; i++, j++)
+        for (int i = 0, j = 0; i < GetPointPos.Count; i++, j++)
         {
             vertice[i] = GetPointPos[j];
             tangents[i] = new Vector4(1f, 0f, 0f, -1f);
@@ -60,12 +58,12 @@ public class MeshGenerate : MonoBehaviour
         if (GetPointPos.Count < 1) point = 0;//計算網格數
         else point = ((GetPointPos.Count / (3 + (Getwidth - 1) * 2) - 1)) * 2 * Getwidth;
 
-        triangle = new int[point * 6 + OldTriangleCount];//計算需要多少三角形點座標
+        triangle = new int[point * 6 ];//計算需要多少三角形點座標
 
-        int t = OldTriangleCount;
+        int t = 0;
         int k = 0;
 
-        for (int vi = OldVerticeCount, x = 1; x <= point; x++, vi += k)
+        for (int vi = 0, x = 1; x <= point; x++, vi += k)
         {
             t = SetQuad(triangle, t, vi, vi + 1, vi + 3 + (2 * (Getwidth - 1)), vi + 4 + (2 * (Getwidth - 1)));
             if (x % (Getwidth * 2) != point % (Getwidth * 2)) k = 1;  //在同一行

@@ -6,10 +6,10 @@ public class CreateHair : MonoBehaviour
 {
     int TriggerDown = 0;  //沒被按下
     int HairCounter = 0; //Hair片數
-    public static int HairWidth = 1;//髮片寬度
+    public static int HairWidth = 3;//髮片寬度
     public static int HairStyleState = 1;//髮片風格選擇
 
-    float length = 0.5f; //點距離
+    float length = 0.05f; //點距離，0.05有點大，0.005可能是最大?，
     public float WidthLimit = 0.005f;//最小0.05,最大0.5
     public static int add = 1; //forWidth
 
@@ -68,7 +68,7 @@ public class CreateHair : MonoBehaviour
                 //PointPos.Add(OldPos);
                 //if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, WidthLimit, add);
                 //if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, WidthLimit, add);
-                OldPos = NewPos = attachPoint.transform.position; Debug.Log(attachPoint.transform.position);
+                OldPos = NewPos = attachPoint.transform.position; 
             }
 
             if (PointPos.Count >= (3 + (HairWidth - 1) * 2) * 2)
@@ -81,8 +81,9 @@ public class CreateHair : MonoBehaviour
                 MeshGenerate.GethairColor.SetTexture("_BumpMap", HairNormal);
             }
 
-            if (TriggerClick.GetStateUp(Pose.inputSource))
+            if (TriggerClick.GetStateUp(Pose.inputSource)) //放開
             {
+                if (PointPos.Count>6) Debug.Log(Vector3.Distance(PointPos[0],PointPos[6]));
                 if (PointPos.Count >= (3 + (HairWidth - 1) * 2) * 2) HairCounter++;
                 else
                 {

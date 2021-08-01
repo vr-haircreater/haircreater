@@ -12,14 +12,16 @@ public class PosGenerate : MonoBehaviour
         Vector3 Vec = NewPos - OldPos;
         for (int i = 0, j = Hairwidth; i < Hairwidth; i++, j--)
         {
-            Vector3 Vec1 = new Vector3((Vec.y) * j, (-Vec.x) * j, Vec.z * j);
+            float n = j * 0.01f;
+            Vector3 Vec1 = new Vector3((Vec.y) * n, (-Vec.x) * n,Vec.z);
             Vector3 temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
             GetPointPos.Add(temp);
         }
         GetPointPos.Add(OldPos);
         for (int i = 0, j = 1; i < Hairwidth; i++, j++)
         {
-            Vector3 Vec1 = new Vector3((-Vec.y) * j, (Vec.x) * j, Vec.z * j);
+            float n = j * 0.01f;
+            Vector3 Vec1 = new Vector3((-Vec.y) * n, (Vec.x) * n, Vec.z);
             Vector3 temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
             GetPointPos.Add(temp);
         }
