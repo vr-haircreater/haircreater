@@ -10,8 +10,7 @@ public class CreateHair : MonoBehaviour
     public static int HairStyleState = 1;//髮片風格選擇
 
     float length = 0.005f; //點距離，0.05有點大，0.005可能是最大?
-    //public float WidthLimit = 0.005f;//最小0.05,最大0.5
-    public static int InputRange = 1;//(1~10)
+    public static int InputRange = 1;//(寬度Range 1~10)
 
     Vector3 NewPos, OldPos; //抓新舊點
 
@@ -65,12 +64,18 @@ public class CreateHair : MonoBehaviour
 
             if (dist > length) //距離大於設定的長度
             {
+                //正規化
+                Vector3 NormaizelVec = NewPos - OldPos;
+                NormaizelVec = Vector3.Normalize(NormaizelVec);
+                NormaizelVec = new Vector3(NormaizelVec.x * 0.005f, NormaizelVec.y * 0.005f, NormaizelVec.z * 0.005f);
+                NewPos = NormaizelVec + OldPos;
+
                 PosCreater = gameObject.GetComponent<PosGenerate>(); //加入PosGenerate
                 PosCreater.GetPosition(OldPos, NewPos, InputRange);
                 //PointPos.Add(OldPos);
                 //if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, WidthLimit, add);
                 //if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, WidthLimit, add);
-                OldPos = NewPos = attachPoint.transform.position; 
+                OldPos = NewPos; 
             }
 
             if (PointPos.Count >= (3 + (HairWidth - 1) * 2) * 2)
@@ -101,13 +106,13 @@ public class CreateHair : MonoBehaviour
     }
     void WidthControl()
     {
-        if (LClick.GetLastStateDown(Pose.inputSource) && InputRange < 10)
-        {
-            InputRange++;
-        }
-        if (RClick.GetLastStateDown(Pose.inputSource) && InputRange > 1)
+        if (LClick.GetLastStateDown(Pose.inputSource) && InputRange > 1)
         {
             InputRange--;
+        }
+        if (RClick.GetLastStateDown(Pose.inputSource) && InputRange < 10)
+        {
+            InputRange++;
         }
         if (Input.GetKeyDown("1")) HairStyleState = 1;
         if (Input.GetKeyDown("2")) HairStyleState = 2;

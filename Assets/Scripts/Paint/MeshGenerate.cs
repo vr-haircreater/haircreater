@@ -36,7 +36,7 @@ public class MeshGenerate : MonoBehaviour
         }
 
         int len = GetPointPos.Count / (3 + (Getwidth - 1) * 2);
-        float TexWidth = 0.03f + 0.022f * CreateHair.InputRange;
+        float TexWidth = 0.03f + 0.022f * (CreateHair.InputRange-1);
 
         for (int i = 0, x = 0; i < len; i++)
         {
