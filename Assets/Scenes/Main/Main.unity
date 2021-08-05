@@ -316,6 +316,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013829830258, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010547881750, guid: dc06161b6d97feb419f45f03b62e14b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011957598740, guid: dc06161b6d97feb419f45f03b62e14b9,
+        type: 3}
+      propertyPath: onTrackingChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011957598740, guid: dc06161b6d97feb419f45f03b62e14b9,
+        type: 3}
+      propertyPath: onTrackingChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011957598740, guid: dc06161b6d97feb419f45f03b62e14b9,
+        type: 3}
+      propertyPath: onTrackingChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
 --- !u!4 &814377581 stripped
@@ -342,15 +366,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f2db2b9b68a6e547972827f1f60b032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WidthLimit: 0.5
   HairModel: []
   MeshCreater: {fileID: 0}
   PosCreater: {fileID: 0}
   TriggerClick:
     actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
+  LClick:
+    actionPath: /actions/default/in/SnapTurnLeft
+    needsReinit: 0
+  RClick:
+    actionPath: /actions/default/in/SnapTurnRight
+    needsReinit: 0
   spawn:
-    actionPath: /actions/default/in/InteractUI
+    actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
   HairTexture: {fileID: 2800000, guid: dedece71ed088d6468a60e5dbd88f9ff, type: 3}
   HairNormal: {fileID: 2800000, guid: 326881d9df931744dbe5281ae06ef683, type: 3}

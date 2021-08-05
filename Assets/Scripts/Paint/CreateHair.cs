@@ -9,9 +9,9 @@ public class CreateHair : MonoBehaviour
     public static int HairWidth = 3;//髮片寬度
     public static int HairStyleState = 1;//髮片風格選擇
 
-    float length = 0.05f; //點距離，0.05有點大，0.005可能是最大?，
-    public float WidthLimit = 0.005f;//最小0.05,最大0.5
-    public static int add = 1; //forWidth
+    float length = 0.005f; //點距離，0.05有點大，0.005可能是最大?
+    //public float WidthLimit = 0.005f;//最小0.05,最大0.5
+    public static int InputRange = 1;//(1~10)
 
     Vector3 NewPos, OldPos; //抓新舊點
 
@@ -23,6 +23,8 @@ public class CreateHair : MonoBehaviour
     public PosGenerate PosCreater; //呼叫 PosGenerate.cs 中的東西給 PosCreater 用
 
     public SteamVR_Action_Boolean TriggerClick;//板機鍵按鈕
+    public SteamVR_Action_Boolean LClick;//left按鈕
+    public SteamVR_Action_Boolean RClick;//right按鈕
     public static SteamVR_Behaviour_Pose Pose;
 
     public SteamVR_Action_Boolean spawn = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
@@ -64,7 +66,7 @@ public class CreateHair : MonoBehaviour
             if (dist > length) //距離大於設定的長度
             {
                 PosCreater = gameObject.GetComponent<PosGenerate>(); //加入PosGenerate
-                PosCreater.GetPosition(OldPos, NewPos, HairWidth);
+                PosCreater.GetPosition(OldPos, NewPos, InputRange);
                 //PointPos.Add(OldPos);
                 //if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, WidthLimit, add);
                 //if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, WidthLimit, add);
@@ -99,15 +101,13 @@ public class CreateHair : MonoBehaviour
     }
     void WidthControl()
     {
-        if (Input.GetKeyDown("down") && WidthLimit > 0.055f)
+        if (LClick.GetLastStateDown(Pose.inputSource) && InputRange < 10)
         {
-            add--;
-            WidthLimit -= 0.05f;
+            InputRange++;
         }
-        if (Input.GetKeyDown("up") && WidthLimit < 0.5f)
+        if (RClick.GetLastStateDown(Pose.inputSource) && InputRange > 1)
         {
-            add++;
-            WidthLimit += 0.05f;
+            InputRange--;
         }
         if (Input.GetKeyDown("1")) HairStyleState = 1;
         if (Input.GetKeyDown("2")) HairStyleState = 2;
