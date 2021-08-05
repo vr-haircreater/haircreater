@@ -9,7 +9,7 @@ public class CreateHair : MonoBehaviour
     public static int HairWidth = 3;//髮片寬度
     public static int HairStyleState = 1;//髮片風格選擇
 
-    float length = 0.005f; //點距離，0.05有點大，0.005可能是最大?
+    float length = 0.05f; //點距離，原本0.05
     public static int InputRange = 1;//(寬度Range 1~10)
 
     Vector3 NewPos, OldPos; //抓新舊點
@@ -67,7 +67,7 @@ public class CreateHair : MonoBehaviour
                 //正規化
                 Vector3 NormaizelVec = NewPos - OldPos;
                 NormaizelVec = Vector3.Normalize(NormaizelVec);
-                NormaizelVec = new Vector3(NormaizelVec.x * 0.005f, NormaizelVec.y * 0.005f, NormaizelVec.z * 0.005f);
+                NormaizelVec = new Vector3(NormaizelVec.x * length, NormaizelVec.y * length, NormaizelVec.z * length);
                 NewPos = NormaizelVec + OldPos;
 
                 PosCreater = gameObject.GetComponent<PosGenerate>(); //加入PosGenerate

@@ -65,11 +65,14 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ColorHair.cs" />
     <Compile Include="Assets\Scripts\Mirror\MirrorReflection.cs" />
+    <Compile Include="Assets\Scripts\Mirror\MirrorTest2.cs" />
+    <Compile Include="Assets\Scripts\Mirror\MirrorTest3.cs" />
     <Compile Include="Assets\Scripts\Paint\CreateHair.cs" />
     <Compile Include="Assets\Scripts\Paint\MeshGenerate.cs" />
     <Compile Include="Assets\Scripts\Paint\PosGenerate.cs" />
     <Compile Include="Assets\Scripts\ShowControl\ShowControl.cs" />
     <Compile Include="Assets\Scripts\TryFunctions\functions.cs" />
+    <None Include="Assets\Scripts\Mirror\MirrorTest3.shader" />
     <None Include="Assets\Scripts\Mirror\Mirror.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
