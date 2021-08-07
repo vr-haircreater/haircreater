@@ -12,41 +12,27 @@ public class PosGenerate : MonoBehaviour
         if (GetPointPos == null)
         {
             Vector3 Vec = OldPos - NewPos;
-            for (int i = 0, j = HairWidth; i < HairWidth; i++, j--)
-            {
-                float n = (j / 3.0f) * 0.7f * 0.1f * range;
-                Vector3 Vec1 = new Vector3((Vec.y) * n, (-Vec.x) * n, (Vec.z) * n);
-                Vector3 temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
-                GetPointPos.Add(temp);
-            }
+            float n = 1.2f * 0.1f * range;//每段長度
+            Vector3 Vec1 = new Vector3((Vec.y) * n, (-Vec.x) * n, (Vec.z) * n);
+            Vector3 temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
+            GetPointPos.Add(temp);
             GetPointPos.Add(OldPos);
-            for (int i = 0, j = 1; i < HairWidth; i++, j++)
-            {
-                float n = (j / 3.0f) * 0.7f * 0.1f * range;
-                Vector3 Vec1 = new Vector3((-Vec.y) * n, (Vec.x) * n, (-Vec.z) * n);
-                Vector3 temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
-                GetPointPos.Add(temp);
-            }
+            Vec1 = new Vector3((-Vec.y) * n, (Vec.x) * n, (-Vec.z) * n);
+            temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
+            GetPointPos.Add(temp);
 
         }
         else
         {
             Vector3 Vec = NewPos - OldPos;
-            for (int i = 0, j = HairWidth; i < HairWidth; i++, j--)
-            {
-                float n = (j / 3.0f) * 0.7f * 0.1f * range;
-                Vector3 Vec1 = new Vector3((Vec.y) * n, (-Vec.x) * n, (Vec.z) * n);
-                Vector3 temp = new Vector3(NewPos.x + Vec1.x, NewPos.y + Vec1.y, NewPos.z + Vec1.z);
-                GetPointPos.Add(temp);
-            }
+            float n = 1.2f * 0.1f * range;//每段長度
+            Vector3 Vec1 = new Vector3((Vec.y) * n, (-Vec.x) * n, (Vec.z) * n);
+            Vector3 temp = new Vector3(NewPos.x + Vec1.x, NewPos.y + Vec1.y, NewPos.z + Vec1.z);
+            GetPointPos.Add(temp);
             GetPointPos.Add(NewPos);
-            for (int i = 0, j = 1; i < HairWidth; i++, j++)
-            {
-                float n = (j / 3.0f) * 0.7f * 0.1f * range;
-                Vector3 Vec1 = new Vector3((-Vec.y) * n, (Vec.x) * n, (-Vec.z) * n);
-                Vector3 temp = new Vector3(NewPos.x + Vec1.x, NewPos.y + Vec1.y, NewPos.z + Vec1.z);
-                GetPointPos.Add(temp);
-            }
+            Vec1 = new Vector3((-Vec.y) * n, (Vec.x) * n, (-Vec.z) * n);
+            temp = new Vector3(NewPos.x + Vec1.x, NewPos.y + Vec1.y, NewPos.z + Vec1.z);
+            GetPointPos.Add(temp);
         }
 
     }

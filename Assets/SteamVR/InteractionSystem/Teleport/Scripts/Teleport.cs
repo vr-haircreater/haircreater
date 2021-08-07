@@ -963,8 +963,8 @@ namespace Valve.VR.InteractionSystem
 		{
 			if ( hintCoroutine != null )
             {
-                ControllerButtonHints.HideTextHint(player.leftHand, teleportAction);
-                ControllerButtonHints.HideTextHint(player.rightHand, teleportAction);
+                //ControllerButtonHints.HideTextHint(player.leftHand, teleportAction);
+                //ControllerButtonHints.HideTextHint(player.rightHand, teleportAction);
 
 				StopCoroutine( hintCoroutine );
 				hintCoroutine = null;
@@ -987,13 +987,13 @@ namespace Valve.VR.InteractionSystem
 				//Show the hint on each eligible hand
 				foreach ( Hand hand in player.hands )
 				{
-					bool showHint = IsEligibleForTeleport( hand );
+					/*bool showHint = IsEligibleForTeleport( hand );
 					bool isShowingHint = !string.IsNullOrEmpty( ControllerButtonHints.GetActiveHintText( hand, teleportAction) );
 					if ( showHint )
 					{
 						if ( !isShowingHint )
 						{
-							ControllerButtonHints.ShowTextHint( hand, teleportAction, "Teleport" );
+							//ControllerButtonHints.ShowTextHint( hand, teleportAction, "Teleport" );
 							prevBreakTime = Time.time;
 							prevHapticPulseTime = Time.time;
 						}
@@ -1009,7 +1009,7 @@ namespace Valve.VR.InteractionSystem
 					else if ( !showHint && isShowingHint )
 					{
 						ControllerButtonHints.HideTextHint( hand, teleportAction);
-					}
+					}*/
 				}
 
 				if ( Time.time > prevBreakTime + 3.0f )
@@ -1028,7 +1028,7 @@ namespace Valve.VR.InteractionSystem
 				yield return null;
 			}
 		}
-
+		
 
 		//-------------------------------------------------
 		public bool IsEligibleForTeleport( Hand hand )

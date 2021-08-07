@@ -6,10 +6,10 @@ public class CreateHair : MonoBehaviour
 {
     int TriggerDown = 0;  //沒被按下
     int HairCounter = 0; //Hair片數
-    public static int HairWidth = 3;//髮片寬度
+    public static int HairWidth = 1;//髮片寬度
     public static int HairStyleState = 1;//髮片風格選擇
 
-    float length = 0.05f; //點距離，原本0.05
+    float length = 0.04f; //點距離，原本0.05
     public static int InputRange = 1;//(寬度Range 1~10)
 
     Vector3 NewPos, OldPos; //抓新舊點
@@ -21,9 +21,9 @@ public class CreateHair : MonoBehaviour
     public MeshGenerate MeshCreater; //呼叫 MeshGenerate.cs 中的東西給 MeshCreater 用
     public PosGenerate PosCreater; //呼叫 PosGenerate.cs 中的東西給 PosCreater 用
 
-    public SteamVR_Action_Boolean TriggerClick;//板機鍵按鈕
-    public SteamVR_Action_Boolean LClick;//left按鈕
-    public SteamVR_Action_Boolean RClick;//right按鈕
+    public SteamVR_Action_Boolean TriggerClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");//板機鍵按鈕
+    public SteamVR_Action_Boolean LClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("SnapTurnRight");//left按鈕
+    public SteamVR_Action_Boolean RClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("SnapTurnLeft");//right按鈕
     public static SteamVR_Behaviour_Pose Pose;
 
     public SteamVR_Action_Boolean spawn = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
@@ -31,15 +31,21 @@ public class CreateHair : MonoBehaviour
     public Texture HairTexture, HairNormal;
 
     public Rigidbody attachPoint;//rigidbody
+    //GameObject rigid;
 
     private void Awake()
     {
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
+        //rigid = GameObject.Find("Player/SteamVRObjects/RightHand/tips/rigid");
+        
     }
 
     private void Start()
     {
         PosCreater = gameObject.AddComponent<PosGenerate>(); //加入PosGenerate
+        HairTexture = Resources.Load<Texture2D>("Textures/F00_000_Hair_00");
+        HairNormal = Resources.Load<Texture2D>("Textures/F00_000_Hair_00_nml");
+        attachPoint = GameObject.Find("Player/SteamVRObjects/RightHand/tips/rigid").GetComponent<Rigidbody>();
     }
 
 
@@ -90,7 +96,9 @@ public class CreateHair : MonoBehaviour
 
             if (TriggerClick.GetStateUp(Pose.inputSource)) //放開
             {
-                if (PointPos.Count>6) Debug.Log(Vector3.Distance(PointPos[0],PointPos[6]));
+                Debug.Log(InputRange);
+                if (PointPos != null) Debug.Log(Vector3.Distance(PointPos[0], PointPos[2]));
+                
                 if (PointPos.Count >= (3 + (HairWidth - 1) * 2) * 2) HairCounter++;
                 else
                 {
