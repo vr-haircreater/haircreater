@@ -12,15 +12,16 @@ public class MeshGenerate : MonoBehaviour
     Vector2[] uv;
     Vector4[] tangents;
     int[] triangle;
-
+    
 
     public void GenerateMesh(List<Vector3> GetPointPos, int Getwidth)
     {
         GethairColor = GetComponent<Renderer>().material;
         HairShader = Shader.Find("Diffuse Fast");
         GethairColor.shader = HairShader;
-
-        GethairColor.color = new Color(222f / 255, 184f / 255, 135f / 255);
+        GethairColor.color = Gather1.cpicker_material.color;
+        //GethairColor.color = CreateHair.cpicker;
+        //GethairColor.color = Gather1.cpicker.color;
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         GetComponent<MeshRenderer>().material = GethairColor;
         mesh.name = "HairModel";
@@ -36,16 +37,19 @@ public class MeshGenerate : MonoBehaviour
         }
 
         int len = GetPointPos.Count / (3 + (Getwidth - 1) * 2);
-        float TexWidth = 0.03f + 0.022f * (CreateHair.InputRange-1);
+        float TexWidth = 0.5f; //+ 0.1f * (CreateHair.InputRange-1); //0.03
+        //float TexWidth = 0.5f + 0.022f * (CreateHair.InputRange - 1); //0.03
 
         for (int i = 0, x = 0; i < len; i++)
         {
             for (int j = 1; j <= (3 + (Getwidth - 1) * 2); j++)
             {
-                if (i == 0) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0f);
+                /*if (i == 0) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0f);
                 else if (i > len - 6) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0.2f + 0.8f / len * i);
                 else if (i == 1 || i % 2 == 1) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0.4f);
                 else if (i % 2 == 0 || i == len - 2) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0.6f);
+                */
+                uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 1.0f / len * i);//Vector3轉Vector2
                 x++;
             }
         }

@@ -12,17 +12,21 @@ public class Gather1 : MonoBehaviour
     private FixedJoint fixedJoint;
     public static SteamVR_Behaviour_Pose Pose;
     public SteamVR_Action_Boolean TriggerClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");//板機鍵按鈕
+    public FlexibleColorPicker cpicker;
+    public static Material cpicker_material;
+
     void Awake()
     {
         Paint = GameObject.Find("Salon_tool/paint1");
         RightHand = GameObject.Find("Player/SteamVRObjects/RightHand");
         rigid = GameObject.Find("Player/SteamVRObjects/RightHand/tips/rigid");
+        cpicker_material = Resources.Load<Material>("Materials/forCanvas");
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
     }
 
     void Start()
     {
-        icon = 0;
+        icon = 1;
         RightHand.AddComponent<CreateHair>();
         ri = rigid.AddComponent<Rigidbody>();
         ri.isKinematic = true;
@@ -42,6 +46,7 @@ public class Gather1 : MonoBehaviour
     }
     void Update()
     {
+        cpicker_material.color = cpicker.color;
         if (icon == 1) 
         {
             /*if (RightHand.GetComponent<CreateHair>() == null)
@@ -49,6 +54,7 @@ public class Gather1 : MonoBehaviour
                 RightHand.AddComponent<CreateHair>();
             }*/
             GetComponent<CreateHair>().enabled = true;
+            //MeshGenerate.GethairColor.color = cpicker.color;
         }
         if (icon == 0)
         {

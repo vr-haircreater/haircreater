@@ -31,13 +31,15 @@ public class CreateHair : MonoBehaviour
     public Texture HairTexture, HairNormal;
 
     public Rigidbody attachPoint;//rigidbody
-    //GameObject rigid;
+    //public GameObject FlexibleColor;
+    //public static FlexibleColorPicker cpicker;
+    //public static Color cpicker;
 
     private void Awake()
     {
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
-        //rigid = GameObject.Find("Player/SteamVRObjects/RightHand/tips/rigid");
         
+
     }
 
     private void Start()
@@ -46,11 +48,15 @@ public class CreateHair : MonoBehaviour
         HairTexture = Resources.Load<Texture2D>("Textures/F00_000_Hair_00");
         HairNormal = Resources.Load<Texture2D>("Textures/F00_000_Hair_00_nml");
         attachPoint = GameObject.Find("Player/SteamVRObjects/RightHand/tips/rigid").GetComponent<Rigidbody>();
+        //FlexibleColor = GameObject.Find("Player/SteamVRObjects/LeftHand/Canvas/FlexibleColorPicker");
+        //cpicker = FlexibleColorPicker.Find("Player/SteamVRObjects/LeftHand/Canvas/FlexibleColorPicker");
     }
 
 
     void Update()
     {
+        //cpicker = FlexibleColor.GetComponent<Renderer>().material.color;
+
         WidthControl();
         if (TriggerDown == 0) //沒被按下
         {
@@ -96,7 +102,7 @@ public class CreateHair : MonoBehaviour
 
             if (TriggerClick.GetStateUp(Pose.inputSource)) //放開
             {
-                Debug.Log(InputRange);
+                //Debug.Log(InputRange);
                 if (PointPos != null) Debug.Log(Vector3.Distance(PointPos[0], PointPos[2]));
                 
                 if (PointPos.Count >= (3 + (HairWidth - 1) * 2) * 2) HairCounter++;

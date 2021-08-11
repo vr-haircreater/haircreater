@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\FlexibleColorPicker\ExampleScene\FCP_ExampleScript.cs" />
+    <Compile Include="Assets\FlexibleColorPicker\Scripts\FCP_SpriteMeshEditor.cs" />
+    <Compile Include="Assets\FlexibleColorPicker\Scripts\FlexibleColorPicker.cs" />
     <Compile Include="Assets\Scripts\ColorHair.cs" />
     <Compile Include="Assets\Scripts\Gather\Gather1.cs" />
     <Compile Include="Assets\Scripts\Gather\mUI.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Assets\Scripts\TryFunctions\functions.cs" />
     <None Include="Assets\Scripts\Mirror\MirrorTest3.shader" />
     <None Include="Assets\Scripts\Mirror\Mirror.shader" />
+    <None Include="Assets\FlexibleColorPicker\Materials\FCP_Gradient.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
