@@ -24,13 +24,12 @@ public class CreateHair : MonoBehaviour
     public SteamVR_Action_Boolean TriggerClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");//板機鍵按鈕
     public SteamVR_Action_Boolean LClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("SnapTurnRight");//left按鈕
     public SteamVR_Action_Boolean RClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("SnapTurnLeft");//right按鈕
-    public static SteamVR_Behaviour_Pose Pose;
+    public static SteamVR_Behaviour_Pose Pose;//手把偵測與座標
 
     public SteamVR_Action_Boolean spawn = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
 
     public Texture HairTexture, HairNormal;
 
-    public Rigidbody attachPoint;//rigidbody
 
     //undo & redo
     Stack<GameObject> StackHairModel = new Stack<GameObject>();
@@ -48,16 +47,12 @@ public class CreateHair : MonoBehaviour
         PosCreater = gameObject.AddComponent<PosGenerate>(); //加入PosGenerate
         HairTexture = Resources.Load<Texture2D>("Textures/F00_000_Hair_00");
         HairNormal = Resources.Load<Texture2D>("Textures/F00_000_Hair_00_nml");
-        attachPoint = GameObject.Find("Player/SteamVRObjects/RightHand/tips/rigid").GetComponent<Rigidbody>();
-        //FlexibleColor = GameObject.Find("Player/SteamVRObjects/LeftHand/Canvas/FlexibleColorPicker");
-        //cpicker = FlexibleColorPicker.Find("Player/SteamVRObjects/LeftHand/Canvas/FlexibleColorPicker");
+
     }
 
 
     void Update()
     {
-        //cpicker = FlexibleColor.GetComponent<Renderer>().material.color;
-
         Control();
         if (TriggerDown == 0) //沒被按下
         {
@@ -66,7 +61,6 @@ public class CreateHair : MonoBehaviour
                 GameObject Model = new GameObject(); //創建model gameobj
                 HairModel.Add(Model); //加入list
                 HairModel[HairCounter].name = "HairModel" + HairCounter; //設定名字
-                //OldPos = NewPos = attachPoint.transform.position;
                 OldPos = NewPos = Pose.transform.position;
                 PointPos.Add(OldPos);
                 undo = 0;
@@ -75,10 +69,8 @@ public class CreateHair : MonoBehaviour
         }
         if (TriggerDown == 1) //被按下
         {
-            //NewPos = attachPoint.transform.position;
             NewPos = Pose.transform.position;
             float dist = Vector3.Distance(OldPos, NewPos); //計算舊點到新點，位置的距離
-
             if (dist > length) //距離大於設定的長度
             {
                 //正規化
@@ -88,6 +80,7 @@ public class CreateHair : MonoBehaviour
                 NewPos = NormaizelVec + OldPos;
                 PointPos.Add(NewPos);
                 PosCreater = gameObject.GetComponent<PosGenerate>(); //加入PosGenerate
+                PosCreater.VectorCross(Pose.transform.up,Pose.transform.forward,Pose.transform.right);
                 //PosCreater.GetPosition(OldPos, NewPos, InputRange);
                 if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange);
                 if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange);
@@ -106,8 +99,6 @@ public class CreateHair : MonoBehaviour
 
             if (TriggerClick.GetStateUp(Pose.inputSource)) //放開
             {
-                //Debug.Log(InputRange);
-
                 if (PointPos.Count >= 2) HairCounter++;
                 else
                 {
@@ -120,7 +111,6 @@ public class CreateHair : MonoBehaviour
                 TriggerDown = 0;
             }
         }
-
 
     }
     void Control()
@@ -153,8 +143,6 @@ public class CreateHair : MonoBehaviour
             tempobject.SetActive(true);
             if (StackHairModel.Count == 0) undo = 0;
         }
-
-
 
     }
 }
