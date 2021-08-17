@@ -35,45 +35,65 @@ public class MeshGenerate : MonoBehaviour
         {
             vertice[i] = GetPointPos[j];
             tangents[i] = new Vector4(1f, 0f, 0f, -1f);
+            uv[i] = new Vector2(GetPointPos[i].x,GetPointPos[i].y);
         }
 
-        int len = GetPointPos.Count / (3 + (Getwidth - 1) * 2);
-        float TexWidth = 0.5f; //+ 0.1f * (CreateHair.InputRange-1); //0.03
+        //int len = GetPointPos.Count / (3 + (Getwidth - 1) * 2);
+        //float TexWidth = 0.5f; //+ 0.1f * (CreateHair.InputRange-1); //0.03
         //float TexWidth = 0.5f + 0.022f * (CreateHair.InputRange - 1); //0.03
 
+        /*for (int i = 0, x = 0; i < len; i++)
+        {
+            for (int j = 1; j <= (3 + (Getwidth - 1) * 2); j++)
+            {
+                uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 1.0f / len * i);//Vector3轉Vector2
+                x++;
+            }
+        }*/
+
+        /*int len = GetPointPos.Count / (3 + (Getwidth - 1) * 2);
+        float TexWidth = 0.5f;
         for (int i = 0, x = 0; i < len; i++)
         {
             for (int j = 1; j <= (3 + (Getwidth - 1) * 2); j++)
             {
-                /*if (i == 0) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0f);
-                else if (i > len - 6) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0.2f + 0.8f / len * i);
-                else if (i == 1 || i % 2 == 1) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0.4f);
-                else if (i % 2 == 0 || i == len - 2) uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 0.6f);
-                */
-                uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 1.0f / len * i);//Vector3轉Vector2
+                uv[x] = new Vector2(TexWidth / 4 * j, 1.0f / len * i);//Vector3轉Vector2
                 x++;
             }
-        }
+        }*/
 
         mesh.vertices = vertice;//mesh網格點生成
         mesh.uv = uv;
         mesh.tangents = tangents;
 
+        /*
         int point;
         if (GetPointPos.Count < 1) point = 0;//計算網格數
         else point = ((GetPointPos.Count / (3 + (Getwidth - 1) * 2) - 1)) * 2 * Getwidth;
-
         triangle = new int[point * 6 ];//計算需要多少三角形點座標
 
         int t = 0;
         int k = 0;
-
         for (int vi = 0, x = 1; x <= point; x++, vi += k)
         {
             t = SetQuad(triangle, t, vi, vi + 1, vi + 3 + (2 * (Getwidth - 1)), vi + 4 + (2 * (Getwidth - 1)));
             if (x % (Getwidth * 2) != point % (Getwidth * 2)) k = 1;  //在同一行
             else k = 2;  //對vi的累加  (需換行時)
+        }*/
+
+        int point = GetPointPos.Count - 2;
+        triangle = new int[point * 6];
+
+        int t = 0;
+        for (int i = 1, vi = 0; i <= point - 2; i++, vi++)
+        {
+            if (i % 4 != 0) t = SetQuad(triangle, t, vi, vi + 1, vi + 4, vi + 5);
+            else t = SetQuad(triangle, t, vi, vi - 3, vi + 4, vi + 1);
         }
+        int vii = 0;
+        t = SetQuad(triangle, t, vii + 2, vii + 1, vii + 3, vii);
+        vii = GetPointPos.Count - 1;
+        t = SetQuad(triangle, t, vii - 1, vii, vii - 2, vii - 3);
 
         mesh.triangles = triangle;
         mesh.RecalculateBounds();

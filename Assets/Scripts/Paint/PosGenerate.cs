@@ -8,33 +8,37 @@ public class PosGenerate : MonoBehaviour
     public List<Vector3> GetPointPos = CreateHair.PointPos; //拿CreateHair的PointPos來用
     List<Vector3> TempPoint = new List<Vector3>();
     public int HairWidth = CreateHair.HairWidth;
-    public Vector3 cross;
-
+    public Vector3 cross1,cross2;
 
     public void GetPosition(Vector3 OldPos, Vector3 NewPos, int range)
     {
         float w = range * 0.005f;
         if (GetPointPos == null)
         {
-            Vector3 Vec1 = OldPos - cross * w;
-            GetPointPos.Add(Vec1);
-            GetPointPos.Add(OldPos);
-            Vec1 = OldPos + cross * w;
-            GetPointPos.Add(Vec1);
+            GetPointPos.Add(OldPos - cross1 * w);
+            GetPointPos.Add(OldPos + cross2 * w);
+            GetPointPos.Add(OldPos + cross1 * w);
+            GetPointPos.Add(OldPos - cross2 * w);
+
+            GetPointPos.Add(NewPos - cross1 * w);
+            GetPointPos.Add(NewPos + cross2 * w);
+            GetPointPos.Add(NewPos + cross1 * w);
+            GetPointPos.Add(NewPos - cross2 * w);
         }
         else 
         {
-            Vector3 Vec1 = NewPos - cross * w;
-            GetPointPos.Add(Vec1);
-            GetPointPos.Add(NewPos);
-            Vec1 = NewPos + cross * w;
-            GetPointPos.Add(Vec1);
+            GetPointPos.Add(NewPos - cross1 * w);
+            GetPointPos.Add(NewPos + cross2 * w);
+            GetPointPos.Add(NewPos + cross1 * w);
+            GetPointPos.Add(NewPos - cross2 * w);
         }
     }
     public void VectorCross(Vector3 up,Vector3 forward,Vector3 right)
     {
-        cross = Vector3.Cross(up,forward);
-        cross.Normalize();
+        cross1 = Vector3.Cross(up,forward);
+        cross1.Normalize();
+        cross2 = Vector3.Cross(forward, right);
+        cross2.Normalize();
     }
 
     public void Straight_HairStyle(List<Vector3> GetPointPos, int range)
@@ -49,19 +53,19 @@ public class PosGenerate : MonoBehaviour
         {
             if (i == 0)
             {
-                Vector3 Vec1 = GetPointPos[i] - cross * w;
+                Vector3 Vec1 = GetPointPos[i] - cross1 * w;
                 TempPoint.Add(Vec1);
                 TempPoint.Add(GetPointPos[i]);
-                Vec1 = GetPointPos[i] + cross * w;
+                Vec1 = GetPointPos[i] + cross1 * w;
                 TempPoint.Add(Vec1);
 
             }
             else
             {
-                Vector3 Vec1 = GetPointPos[i] - cross * w;
+                Vector3 Vec1 = GetPointPos[i] - cross1 * w;
                 TempPoint.Add(Vec1);
                 TempPoint.Add(GetPointPos[i]);
-                Vec1 = GetPointPos[i] + cross * w;
+                Vec1 = GetPointPos[i] + cross1 * w;
                 TempPoint.Add(Vec1);
             }
             if (w < range * 0.005f) w += w1;
@@ -81,10 +85,10 @@ public class PosGenerate : MonoBehaviour
         {
             if (i == 0)
             {
-                Vector3 Vec1 = GetPointPos[i] - cross * w;
+                Vector3 Vec1 = GetPointPos[i] - cross1 * w;
                 TempPoint.Add(Vec1);
                 TempPoint.Add(GetPointPos[i]);
-                Vec1 = GetPointPos[i] + cross * w;
+                Vec1 = GetPointPos[i] + cross1 * w;
                 TempPoint.Add(Vec1);
             }
             else if (i == GetPointPos.Count - 1 && GetPointPos.Count > 2)
@@ -93,10 +97,10 @@ public class PosGenerate : MonoBehaviour
             }
             else
             {
-                Vector3 Vec1 = GetPointPos[i] - cross * w;
+                Vector3 Vec1 = GetPointPos[i] - cross1 * w;
                 TempPoint.Add(Vec1);
                 TempPoint.Add(GetPointPos[i]);
-                Vec1 = GetPointPos[i] + cross * w;
+                Vec1 = GetPointPos[i] + cross1 * w;
                 TempPoint.Add(Vec1);
             }
             if (w < range * 0.005f && i < GetPointPos.Count / 2) w += w1;
@@ -109,30 +113,20 @@ public class PosGenerate : MonoBehaviour
 }
 
 /*
- if (GetPointPos == null)
+ * float w = range * 0.005f;
+        if (GetPointPos == null)
         {
-            Vector3 Vec = OldPos - NewPos;
-            float n = 1.2f * 0.1f * range;//每段長度
-            Vector3 Vec1 = new Vector3((Vec.y) * n, (-Vec.x) * n, (Vec.z) * n);
-            Debug.Log(Vec1);
-            Vector3 temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
-            GetPointPos.Add(temp);
+            GetPointPos.Add(OldPos - cross1 * w);
             GetPointPos.Add(OldPos);
-            Vec1 = new Vector3((-Vec.y) * n, (Vec.x) * n, (-Vec.z) * n);
-            temp = new Vector3(OldPos.x + Vec1.x, OldPos.y + Vec1.y, OldPos.z + Vec1.z);
-            GetPointPos.Add(temp);
-
-        }
-        else
-        {
-            Vector3 Vec = NewPos - OldPos;
-            float n = 1.2f * 0.1f * range;//每段長度
-            Vector3 Vec1 = new Vector3((Vec.y) * n, (-Vec.x) * n, (Vec.z) * n);
-            Vector3 temp = new Vector3(NewPos.x + Vec1.x, NewPos.y + Vec1.y, NewPos.z + Vec1.z);
-            GetPointPos.Add(temp);
+            GetPointPos.Add(OldPos + cross1 * w);
+            GetPointPos.Add(NewPos - cross1 * w);
             GetPointPos.Add(NewPos);
-            Vec1 = new Vector3((-Vec.y) * n, (Vec.x) * n, (-Vec.z) * n);
-            temp = new Vector3(NewPos.x + Vec1.x, NewPos.y + Vec1.y, NewPos.z + Vec1.z);
-            GetPointPos.Add(temp);
+            GetPointPos.Add(NewPos + cross1 * w);
         }
- */
+        else 
+        {
+            GetPointPos.Add(NewPos - cross1 * w);
+            GetPointPos.Add(NewPos);
+            GetPointPos.Add(NewPos + cross1 * w);
+        }
+*/

@@ -62,7 +62,7 @@ public class CreateHair : MonoBehaviour
                 HairModel.Add(Model); //加入list
                 HairModel[HairCounter].name = "HairModel" + HairCounter; //設定名字
                 OldPos = NewPos = Pose.transform.position;
-                PointPos.Add(OldPos);
+                //PointPos.Add(OldPos);
                 undo = 0;
                 TriggerDown = 1;
             }
@@ -78,28 +78,28 @@ public class CreateHair : MonoBehaviour
                 NormaizelVec = Vector3.Normalize(NormaizelVec);
                 NormaizelVec = new Vector3(NormaizelVec.x * length, NormaizelVec.y * length, NormaizelVec.z * length);
                 NewPos = NormaizelVec + OldPos;
-                PointPos.Add(NewPos);
+                //PointPos.Add(NewPos);
                 PosCreater = gameObject.GetComponent<PosGenerate>(); //加入PosGenerate
                 PosCreater.VectorCross(Pose.transform.up,Pose.transform.forward,Pose.transform.right);
-                //PosCreater.GetPosition(OldPos, NewPos, InputRange);
-                if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange);
-                if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange);
+                PosCreater.GetPosition(OldPos, NewPos, InputRange);
+                //if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange);
+                //if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange);
                 OldPos = NewPos;
             }
 
-            if (PointPos.Count >= 2)
+            if (PointPos.Count >= 6)
             {
                 if (HairModel[HairCounter].GetComponent<MeshGenerate>() == null)
                     MeshCreater = HairModel[HairCounter].AddComponent<MeshGenerate>();
                 else MeshCreater = HairModel[HairCounter].GetComponent<MeshGenerate>();
-                MeshCreater.GenerateMesh(UpdatePointPos, HairWidth);
+                MeshCreater.GenerateMesh(PointPos, HairWidth);
                 MeshGenerate.GethairColor.SetTexture("_MainTex", HairTexture);
                 MeshGenerate.GethairColor.SetTexture("_BumpMap", HairNormal);
             }
 
             if (TriggerClick.GetStateUp(Pose.inputSource)) //放開
             {
-                if (PointPos.Count >= 2) HairCounter++;
+                if (PointPos.Count >= 6) HairCounter++;
                 else
                 {
                     //清除不夠長所以沒加到程式碼的的髮片gameobj
