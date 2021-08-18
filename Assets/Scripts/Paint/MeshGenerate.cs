@@ -12,14 +12,14 @@ public class MeshGenerate : MonoBehaviour
     Vector2[] uv;
     Vector4[] tangents;
     int[] triangle;
-    
+
 
     public void GenerateMesh(List<Vector3> GetPointPos, int Getwidth)
     {
         GethairColor = GetComponent<Renderer>().material;
         HairShader = Shader.Find("Diffuse Fast");
         GethairColor.shader = HairShader;
-        GethairColor.color = new Color(222f / 255, 184f / 255, 135f / 255); 
+        GethairColor.color = new Color(222f / 255, 184f / 255, 135f / 255);
         //GethairColor.color = Gather1.cpicker_material.color;
         //GethairColor.color = CreateHair.cpicker;
         //GethairColor.color = Gather1.cpicker.color;
@@ -35,32 +35,21 @@ public class MeshGenerate : MonoBehaviour
         {
             vertice[i] = GetPointPos[j];
             tangents[i] = new Vector4(1f, 0f, 0f, -1f);
-            uv[i] = new Vector2(GetPointPos[i].x,GetPointPos[i].y);
         }
 
         //int len = GetPointPos.Count / (3 + (Getwidth - 1) * 2);
         //float TexWidth = 0.5f; //+ 0.1f * (CreateHair.InputRange-1); //0.03
-        //float TexWidth = 0.5f + 0.022f * (CreateHair.InputRange - 1); //0.03
 
-        /*for (int i = 0, x = 0; i < len; i++)
-        {
-            for (int j = 1; j <= (3 + (Getwidth - 1) * 2); j++)
-            {
-                uv[x] = new Vector2(TexWidth / (3 + (Getwidth - 1) / 2) * j, 1.0f / len * i);//Vector3轉Vector2
-                x++;
-            }
-        }*/
-
-        /*int len = GetPointPos.Count / (3 + (Getwidth - 1) * 2);
-        float TexWidth = 0.5f;
+        int len = GetPointPos.Count / 4;
+        float TexWidth = 0.8f;
         for (int i = 0, x = 0; i < len; i++)
         {
-            for (int j = 1; j <= (3 + (Getwidth - 1) * 2); j++)
+            for (int j = 1; j <= 4; j++)
             {
-                uv[x] = new Vector2(TexWidth / 4 * j, 1.0f / len * i);//Vector3轉Vector2
+                uv[x] = new Vector2(TexWidth / 4 * j, 1.0f / len * i);
                 x++;
             }
-        }*/
+        }
 
         mesh.vertices = vertice;//mesh網格點生成
         mesh.uv = uv;

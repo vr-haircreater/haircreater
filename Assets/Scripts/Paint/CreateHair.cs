@@ -10,7 +10,8 @@ public class CreateHair : MonoBehaviour
     public static int HairStyleState = 2;//髮片風格選擇
 
     float length = 0.04f; //點距離，原本0.05
-    public static int InputRange = 1;//(寬度Range 1~10)
+    public int InputRange = 1;//(寬度Range 1~10)
+    public int InputRangeThickness = 5; //(厚度Range 1~10)
 
     Vector3 NewPos, OldPos; //抓新舊點
 
@@ -50,7 +51,6 @@ public class CreateHair : MonoBehaviour
 
     }
 
-
     void Update()
     {
         Control();
@@ -62,7 +62,7 @@ public class CreateHair : MonoBehaviour
                 HairModel.Add(Model); //加入list
                 HairModel[HairCounter].name = "HairModel" + HairCounter; //設定名字
                 OldPos = NewPos = Pose.transform.position;
-                //PointPos.Add(OldPos);
+                PointPos.Add(OldPos);
                 undo = 0;
                 TriggerDown = 1;
             }
@@ -78,28 +78,28 @@ public class CreateHair : MonoBehaviour
                 NormaizelVec = Vector3.Normalize(NormaizelVec);
                 NormaizelVec = new Vector3(NormaizelVec.x * length, NormaizelVec.y * length, NormaizelVec.z * length);
                 NewPos = NormaizelVec + OldPos;
-                //PointPos.Add(NewPos);
+                PointPos.Add(NewPos);
                 PosCreater = gameObject.GetComponent<PosGenerate>(); //加入PosGenerate
-                PosCreater.VectorCross(Pose.transform.up,Pose.transform.forward,Pose.transform.right);
-                PosCreater.GetPosition(OldPos, NewPos, InputRange);
-                //if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange);
-                //if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange);
+                PosCreater.VectorCross(Pose.transform.up, Pose.transform.forward, Pose.transform.right);
+                //PosCreater.GetPosition(OldPos, NewPos, InputRange);
+                if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange, InputRangeThickness);
+                if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange, InputRangeThickness);
                 OldPos = NewPos;
             }
 
-            if (PointPos.Count >= 6)
+            if (PointPos.Count >= 2)
             {
                 if (HairModel[HairCounter].GetComponent<MeshGenerate>() == null)
                     MeshCreater = HairModel[HairCounter].AddComponent<MeshGenerate>();
                 else MeshCreater = HairModel[HairCounter].GetComponent<MeshGenerate>();
-                MeshCreater.GenerateMesh(PointPos, HairWidth);
+                MeshCreater.GenerateMesh(UpdatePointPos, HairWidth);
                 MeshGenerate.GethairColor.SetTexture("_MainTex", HairTexture);
                 MeshGenerate.GethairColor.SetTexture("_BumpMap", HairNormal);
             }
 
             if (TriggerClick.GetStateUp(Pose.inputSource)) //放開
             {
-                if (PointPos.Count >= 6) HairCounter++;
+                if (PointPos.Count >= 2) HairCounter++;
                 else
                 {
                     //清除不夠長所以沒加到程式碼的的髮片gameobj
@@ -115,14 +115,13 @@ public class CreateHair : MonoBehaviour
     }
     void Control()
     {
-        if (LClick.GetLastStateDown(Pose.inputSource) && InputRange > 1)
-        {
-            InputRange--;
-        }
-        if (RClick.GetLastStateDown(Pose.inputSource) && InputRange < 10)
-        {
-            InputRange++;
-        }
+        //寬度
+        if (LClick.GetLastStateDown(Pose.inputSource) && InputRange > 1) InputRange--;
+        if (RClick.GetLastStateDown(Pose.inputSource) && InputRange < 10) InputRange++;
+        //厚度
+        if (Input.GetKeyDown("right") && InputRangeThickness > 1) InputRangeThickness--;
+        if (Input.GetKeyDown("left") && InputRangeThickness < 10) InputRangeThickness++;
+
         if (Input.GetKeyDown("1")) HairStyleState = 1;
         if (Input.GetKeyDown("2")) HairStyleState = 2;
 
