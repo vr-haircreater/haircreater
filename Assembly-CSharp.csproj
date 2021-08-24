@@ -66,7 +66,6 @@
     <Compile Include="Assets\FlexibleColorPicker\ExampleScene\FCP_ExampleScript.cs" />
     <Compile Include="Assets\FlexibleColorPicker\Scripts\FCP_SpriteMeshEditor.cs" />
     <Compile Include="Assets\FlexibleColorPicker\Scripts\FlexibleColorPicker.cs" />
-    <Compile Include="Assets\Scripts\ColorHair.cs" />
     <Compile Include="Assets\Scripts\Gather\Gather1.cs" />
     <Compile Include="Assets\Scripts\Gather\InteractableContrallor.cs" />
     <Compile Include="Assets\Scripts\Gather\PickDrop.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Assets\Scripts\Mirror\MirrorReflection.cs" />
     <Compile Include="Assets\Scripts\Mirror\MirrorTest2.cs" />
     <Compile Include="Assets\Scripts\Mirror\MirrorTest3.cs" />
+    <Compile Include="Assets\Scripts\Paint\ColorHair.cs" />
     <Compile Include="Assets\Scripts\Paint\CreateHair.cs" />
     <Compile Include="Assets\Scripts\Paint\MeshGenerate.cs" />
     <Compile Include="Assets\Scripts\Paint\PosGenerate.cs" />
