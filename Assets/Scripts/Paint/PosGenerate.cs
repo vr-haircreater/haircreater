@@ -35,9 +35,9 @@ public class PosGenerate : MonoBehaviour
     }
     public void VectorCross(Vector3 up, Vector3 forward, Vector3 right)
     {
-        cross1 = Vector3.Cross(up, forward);
+        cross1 = Vector3.Cross(up, forward);//x
         cross1.Normalize();
-        cross2 = Vector3.Cross(forward, right);
+        cross2 = Vector3.Cross(up, right);//z
         cross2.Normalize();
     }
 
@@ -45,10 +45,9 @@ public class PosGenerate : MonoBehaviour
     {
         float w1;
         float w = range * 0.005f * 0.2f;
+        float t = thickness * 0.001f;
         if (GetPointPos.Count <= 6) w1 = (range * 0.005f) / GetPointPos.Count;
         else w1 = (range * 0.005f) / range;
-
-        float t = thickness * 0.001f;
 
         TempPoint.Clear();
         for (int i = 0; i < GetPointPos.Count; i++)
@@ -75,10 +74,13 @@ public class PosGenerate : MonoBehaviour
 
     public void Dimand_HairStyle(List<Vector3> GetPointPos, int range, int thickness)
     {
-
+        float t1;
         float w1 = range * 0.005f / (GetPointPos.Count / 2);
         float w = range * 0.005f * 0.2f;
         float t = thickness * 0.001f;
+
+
+
 
         TempPoint.Clear();
         for (int i = 0; i < GetPointPos.Count; i++)

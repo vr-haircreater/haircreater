@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Paint
+  - Eraser
+  - Clear
+  - Grid
   layers:
   - Default
   - TransparentFX
