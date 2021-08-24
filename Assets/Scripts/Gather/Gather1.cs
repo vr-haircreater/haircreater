@@ -6,7 +6,8 @@ using Valve.VR;
 
 public class Gather1 : MonoBehaviour
 {
-    public int icon;
+    public static int icon;
+    public int state;
     GameObject RightHand,rigid;
     //Rigidbody ri;
     
@@ -36,7 +37,9 @@ public class Gather1 : MonoBehaviour
     void Start()
     {
         icon = 0;
+        state = 0;
         RightHand.AddComponent<CreateHair>();
+        GetComponent<CreateHair>().enabled = true;
         //ri = rigid.AddComponent<Rigidbody>();
         //ri.isKinematic = true;
     }
@@ -44,22 +47,24 @@ public class Gather1 : MonoBehaviour
     void Update()
     {
         cpicker_material.color = cpicker.color;
-        if (icon == 1) 
+        if (icon == 1) //Paint
+        {
+            if (m_Grip.GetStateDown(Pose.inputSource)) Drop();
+        }
+        if (icon == 2) //Eraser
         {
             GetComponent<CreateHair>().enabled = true;
-            if (m_Grip.GetStateDown(Pose.inputSource))
-            {
-                Drop();
-            }
+            if (m_Grip.GetStateDown(Pose.inputSource)) Drop();
+        }
+        if (icon == 3) //Clear
+        {
+            GetComponent<CreateHair>().enabled = true;
+            if (m_Grip.GetStateDown(Pose.inputSource)) Drop();
         }
         if (icon == 0)
         {
-            if (TriggerClick.GetStateDown(Pose.inputSource))
-            {
-                Pickup();
-
-            }
-            GetComponent<CreateHair>().enabled = false;
+            if (TriggerClick.GetStateDown(Pose.inputSource)) Pickup();
+            //GetComponent<CreateHair>().enabled = false;
         }
     }
 
@@ -68,13 +73,32 @@ public class Gather1 : MonoBehaviour
         if (other.gameObject.CompareTag("Paint"))
         {
             m_object = other.gameObject;
+            state = 1;
 
         }
-        
+        if (other.gameObject.CompareTag("Eraser"))
+        {
+            m_object = other.gameObject;
+            state = 2;
+        }
+        if (other.gameObject.CompareTag("Clear"))
+        {
+            m_object = other.gameObject;
+            state = 3;
+        }
+
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Paint"))
+        {
+            m_object = null;
+        }
+        if (other.gameObject.CompareTag("Eraser"))
+        {
+            m_object = null;
+        }
+        if (other.gameObject.CompareTag("Clear"))
         {
             m_object = null;
         }
@@ -91,7 +115,7 @@ public class Gather1 : MonoBehaviour
         Rigidbody target = m_object.GetComponent<Rigidbody>();
         m_Joint.connectedBody = target;
         m_object.GetComponent<InteractableContrallor>().m_ActiveHand = this;
-        icon = 1;
+        icon = state;
     }
     public void Drop()
     {
@@ -104,6 +128,7 @@ public class Gather1 : MonoBehaviour
         m_object.GetComponent<InteractableContrallor>().m_ActiveHand = null;
         m_object = null;
         icon = 0;
+        state = 0;
 
     }
 

@@ -9,7 +9,7 @@ public class CreateHair : MonoBehaviour
     public static int HairWidth = 1;//髮片寬度
     public static int HairStyleState = 2;//髮片風格選擇
 
-    float length = 0.04f; //點距離，原本0.05
+    float length = 0.025f; //點距離，原本0.05
     public int InputRange = 1;//(寬度Range 1~10)
     public int InputRangeThickness = 5; //(厚度Range 1~10)
 
@@ -54,7 +54,7 @@ public class CreateHair : MonoBehaviour
     void Update()
     {
         Control();
-        if (TriggerDown == 0) //沒被按下
+        if (TriggerDown == 0 && Gather1.icon == 1) //沒被按下
         {
             if (TriggerClick.GetStateDown(Pose.inputSource)) //偵測被按下的瞬間
             {
@@ -141,6 +141,14 @@ public class CreateHair : MonoBehaviour
             HairModel.Add(tempobject);
             tempobject.SetActive(true);
             if (StackHairModel.Count == 0) undo = 0;
+        }
+        if (Gather1.icon == 2) 
+        { 
+        
+        }
+        if (Gather1.icon == 3) 
+        {
+        
         }
 
     }

@@ -35,9 +35,9 @@ public class PosGenerate : MonoBehaviour
     }
     public void VectorCross(Vector3 up, Vector3 forward, Vector3 right)
     {
-        cross1 = Vector3.Cross(up, forward);
+        cross1 = Vector3.Cross(up, forward);//x
         cross1.Normalize();
-        cross2 = Vector3.Cross(forward, right);
+        cross2 = Vector3.Cross(up, right);
         cross2.Normalize();
     }
 
