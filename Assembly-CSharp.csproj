@@ -79,6 +79,10 @@
     <Compile Include="Assets\Scripts\Paint\MeshGenerate.cs" />
     <Compile Include="Assets\Scripts\Paint\PosGenerate.cs" />
     <Compile Include="Assets\Scripts\ShowControl\ShowControl.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\InteractableA.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\Pointer.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\Removable.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\SliderControl.cs" />
     <Compile Include="Assets\Scripts\TryFunctions\functions.cs" />
     <None Include="Assets\Scripts\Mirror\MirrorTest3.shader" />
     <None Include="Assets\Scripts\Mirror\Mirror.shader" />
