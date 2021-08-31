@@ -8,6 +8,7 @@ public class Gather1 : MonoBehaviour
 {
     public static int icon;
     public int state;
+    int call = 0;
     public static bool GridState;
     GameObject RightHand;
 
@@ -105,6 +106,10 @@ public class Gather1 : MonoBehaviour
         if (other.gameObject.CompareTag("Clear"))
         {
             m_object = null;
+        }
+        if (other.gameObject.CompareTag("Grid"))
+        {
+            GridState = false;
         }
 
     }
