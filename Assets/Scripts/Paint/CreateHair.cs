@@ -48,7 +48,6 @@ public class CreateHair : MonoBehaviour
         PosCreater = gameObject.AddComponent<PosGenerate>(); //加入PosGenerate
         HairTexture = Resources.Load<Texture2D>("Textures/F00_000_Hair_00");
         HairNormal = Resources.Load<Texture2D>("Textures/F00_000_Hair_00_nml");
-
     }
 
     void Update()
@@ -56,7 +55,7 @@ public class CreateHair : MonoBehaviour
         Control();
         if (TriggerDown == 0 && Gather1.icon == 1) //沒被按下
         {
-            if (TriggerClick.GetStateDown(Pose.inputSource)) //偵測被按下的瞬間
+            if (TriggerClick.GetStateDown(Pose.inputSource) && Gather1.GridState == true) //偵測被按下的瞬間
             {
                 GameObject Model = new GameObject(); //創建model gameobj
                 HairModel.Add(Model); //加入list
@@ -108,6 +107,7 @@ public class CreateHair : MonoBehaviour
                     HairModel.RemoveAt(least);
                 }
                 PointPos.Clear();
+                Gather1.GridState = false;
                 TriggerDown = 0;
             }
         }

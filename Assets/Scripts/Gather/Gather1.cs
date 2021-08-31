@@ -8,7 +8,10 @@ public class Gather1 : MonoBehaviour
 {
     public static int icon;
     public int state;
-    GameObject RightHand,rigid;
+    int call = 0;
+    public static bool GridState;
+    GameObject RightHand;
+
     //Rigidbody ri;
     
     public static SteamVR_Behaviour_Pose Pose = null;
@@ -25,9 +28,7 @@ public class Gather1 : MonoBehaviour
 
     void Awake()
     {
-        //Paint = GameObject.Find("Salon_tool/paint1");
         RightHand = GameObject.Find("Player/SteamVRObjects/RightHand");
-        //rigid = GameObject.Find("Player/SteamVRObjects/RightHand/tips/rigid");
         cpicker_material = Resources.Load<Material>("Materials/forCanvas");
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
@@ -38,10 +39,10 @@ public class Gather1 : MonoBehaviour
     {
         icon = 0;
         state = 0;
+        GridState = false;
         RightHand.AddComponent<CreateHair>();
         GetComponent<CreateHair>().enabled = true;
-        //ri = rigid.AddComponent<Rigidbody>();
-        //ri.isKinematic = true;
+
     }
 
     void Update()
@@ -86,6 +87,10 @@ public class Gather1 : MonoBehaviour
             m_object = other.gameObject;
             state = 3;
         }
+        if (other.gameObject.CompareTag("Grid")) 
+        {
+            GridState = true;
+        }
 
     }
     private void OnTriggerExit(Collider other)
@@ -101,6 +106,10 @@ public class Gather1 : MonoBehaviour
         if (other.gameObject.CompareTag("Clear"))
         {
             m_object = null;
+        }
+        if (other.gameObject.CompareTag("Grid"))
+        {
+            GridState = false;
         }
 
     }

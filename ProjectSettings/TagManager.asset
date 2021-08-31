@@ -7,6 +7,7 @@ TagManager:
   - Paint
   - Eraser
   - Clear
+  - Grid
   layers:
   - Default
   - TransparentFX
