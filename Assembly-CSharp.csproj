@@ -66,6 +66,8 @@
     <Compile Include="Assets\FlexibleColorPicker\ExampleScene\FCP_ExampleScript.cs" />
     <Compile Include="Assets\FlexibleColorPicker\Scripts\FCP_SpriteMeshEditor.cs" />
     <Compile Include="Assets\FlexibleColorPicker\Scripts\FlexibleColorPicker.cs" />
+    <Compile Include="Assets\Scripts\Canvas_Pointer\VRInputModule.cs" />
+    <Compile Include="Assets\Scripts\Canvas_Pointer\pointer.cs" />
     <Compile Include="Assets\Scripts\Gather\FollowTarget.cs" />
     <Compile Include="Assets\Scripts\Gather\Gather1.cs" />
     <Compile Include="Assets\Scripts\Gather\InteractableContrallor.cs" />
