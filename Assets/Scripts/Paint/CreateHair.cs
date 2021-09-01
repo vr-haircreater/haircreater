@@ -30,6 +30,7 @@ public class CreateHair : MonoBehaviour
     public SteamVR_Action_Boolean spawn = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
 
     public Texture HairTexture, HairNormal;
+    public GameObject HairModelG,HairModelB;
 
 
     //undo & redo
@@ -41,6 +42,8 @@ public class CreateHair : MonoBehaviour
     {
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
         redoObject = new GameObject();
+        HairModelG = GameObject.Find("GirlSit/HairModelG");
+        HairModelB = GameObject.Find("BoySit/HairModelB");
     }
 
     private void Start()
@@ -60,7 +63,8 @@ public class CreateHair : MonoBehaviour
             {
                 GameObject Model = new GameObject(); //創建model gameobj
                 HairModel.Add(Model); //加入list
-                HairModel[HairCounter].name = "HairModel" + HairCounter; //設定名字
+                Model.transform.SetParent(HairModelG.transform);//還需要判定到底是做男做女
+                HairModel[HairCounter].name = "HairModel" + HairCounter; //設定名字 
                 OldPos = NewPos = Pose.transform.position;
                 PointPos.Add(OldPos);
                 undo = 0;
