@@ -11,6 +11,7 @@ public class Gather1 : MonoBehaviour
     int call = 0;
     public static bool GridState;
     GameObject RightHand;
+    public static bool RightDown = false; 
 
     //Rigidbody ri;
     
@@ -47,6 +48,7 @@ public class Gather1 : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log("右:"+ Pose.transform.position);
         cpicker_material.color = cpicker.color;
         if (icon == 1) //Paint
         {
@@ -67,6 +69,12 @@ public class Gather1 : MonoBehaviour
             if (TriggerClick.GetStateDown(Pose.inputSource)) Pickup();
             //GetComponent<CreateHair>().enabled = false;
         }
+        if (TriggerClick.GetStateDown(Pose.inputSource))
+        {
+            //Debug.Log(Pose.transform.position);
+            RightDown = true;
+        }
+        if (TriggerClick.GetStateUp(Pose.inputSource)) RightDown = false;
     }
 
     private void OnTriggerEnter(Collider other)

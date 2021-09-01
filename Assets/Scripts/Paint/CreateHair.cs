@@ -52,6 +52,7 @@ public class CreateHair : MonoBehaviour
 
     void Update()
     {
+  
         Control();
         if (TriggerDown == 0 && Gather1.icon == 1) //沒被按下
         {
