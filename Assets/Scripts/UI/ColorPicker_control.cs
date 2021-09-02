@@ -34,20 +34,22 @@ public class ColorPicker_control : MonoBehaviour
         if (Gather1.RightDown==true)
         {
             mousePos = dot.transform.position;
-            
+            HsliderPos = h_slider.transform.position;
             //print("mouse:"+mousePos);
             if (mousePos.x >= svPos.x && mousePos.x <= (svPos.x + 0.15f) && mousePos.y <= svPos.y && mousePos.y >= (svPos.y - 0.158f))
             {
                 //print("SV:"+mousePos);
-                sv_slider.transform.position = new Vector3(mousePos.x, mousePos.y, SVsliderPos.z);
+                //SVsliderPos = sv_slider.transform.position;
+                sv_slider.transform.position = new Vector3(mousePos.x, mousePos.y, mousePos.z);
                 color_Stemp = (mousePos.x - svPos.x) / 0.15f;
                 color_Vtemp = (mousePos.y - svPos.y + 0.158f) / 0.158f;
                 Debug.Log("Y");
             }
-            if (mousePos.x >= hPos.x && mousePos.x <= (hPos.x + 0.15f) && mousePos.y <= hPos.y && mousePos.y >= hPos.y - hWidth)
+            if (mousePos.x >= hPos.x && mousePos.x <= (hPos.x + 0.15f) && mousePos.y <= hPos.y && mousePos.y >= hPos.y - 0.012f)
             {
                 //print("H:"+mousePos);
-                h_slider.transform.position = new Vector3(mousePos.x, HsliderPos.y, HsliderPos.z);
+                
+                h_slider.transform.position = new Vector3(mousePos.x, mousePos.y, mousePos.z);
                 color_Htemp = (mousePos.x - hPos.x) / 0.15f;
             }
             Debug.Log("Pos:" + mousePos);
