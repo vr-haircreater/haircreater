@@ -12,11 +12,15 @@ public class Menu : MonoBehaviour
     {
         for(int i =0;i < 12; i++)
         {
-            btns[i] = GameObject.Find("button" + i);
+            btns[i] = GameObject.Find("button" + i); 
         }
     }
 
     void Start()
+    {
+        
+    }
+    void Fbtn1()
     {
         
     }
