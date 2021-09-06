@@ -86,10 +86,12 @@
     <Compile Include="Assets\Scripts\TryFunctions\Removable.cs" />
     <Compile Include="Assets\Scripts\TryFunctions\SliderControl.cs" />
     <Compile Include="Assets\Scripts\TryFunctions\functions.cs" />
-    <Compile Include="Assets\Scripts\UI\CallerPad.cs" />
-    <Compile Include="Assets\Scripts\UI\ColorPicker_control.cs" />
-    <Compile Include="Assets\Scripts\UI\ColorPicker_h.cs" />
-    <Compile Include="Assets\Scripts\UI\ColorPicker_sv.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\CallerPad.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\ColorPicker_control.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\ColorPicker_h.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\ColorPicker_sv.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\PanelA.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\mUIElements.cs" />
     <None Include="Assets\Scripts\Mirror\MirrorTest3.shader" />
     <None Include="Assets\Scripts\Mirror\Mirror.shader" />
     <None Include="Assets\FlexibleColorPicker\Materials\FCP_Gradient.shader" />
