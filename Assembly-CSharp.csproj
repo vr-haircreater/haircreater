@@ -86,10 +86,12 @@
     <Compile Include="Assets\Scripts\TryFunctions\Removable.cs" />
     <Compile Include="Assets\Scripts\TryFunctions\SliderControl.cs" />
     <Compile Include="Assets\Scripts\TryFunctions\functions.cs" />
-    <Compile Include="Assets\Scripts\UI\CallerPad.cs" />
-    <Compile Include="Assets\Scripts\UI\ColorPicker_control.cs" />
-    <Compile Include="Assets\Scripts\UI\ColorPicker_h.cs" />
-    <Compile Include="Assets\Scripts\UI\ColorPicker_sv.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\CallerPad.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\ColorPicker_control.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\ColorPicker_h.cs" />
+    <Compile Include="Assets\Scripts\UI\Color\ColorPicker_sv.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\Menu.cs" />
+    <Compile Include="Assets\Scripts\UI\Panel\mUIElements.cs" />
     <None Include="Assets\Scripts\Mirror\MirrorTest3.shader" />
     <None Include="Assets\Scripts\Mirror\Mirror.shader" />
     <None Include="Assets\FlexibleColorPicker\Materials\FCP_Gradient.shader" />
@@ -665,45 +667,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ShaderProperty.Editor.csproj">
-      <Project>{1C1BC99E-966C-8FFB-B46C-8EB7E52CFD54}</Project>
-      <Name>ShaderProperty.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniUnlit.Editor.csproj">
-      <Project>{19D8BE59-6FE8-5F8D-3212-15A73121F35E}</Project>
-      <Name>UniUnlit.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniHumanoid.csproj">
-      <Project>{FCF13443-9489-D37F-ADC8-129973C74CA5}</Project>
-      <Name>UniHumanoid</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniJSON.csproj">
-      <Project>{4355B06E-08BB-FE1D-ED04-E606D4966F4A}</Project>
-      <Name>UniJSON</Name>
-    </ProjectReference>
     <ProjectReference Include="SteamVR_Actions.csproj">
       <Project>{2F7CEA4E-10BD-F489-2D83-40272EBEBFC0}</Project>
       <Name>SteamVR_Actions</Name>
-    </ProjectReference>
-    <ProjectReference Include="DepthFirstScheduler.csproj">
-      <Project>{A9A6FCE3-52DC-9174-FD8B-B9DC08CFF776}</Project>
-      <Name>DepthFirstScheduler</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniGLTF.Editor.csproj">
-      <Project>{0C1D3A77-4B52-534A-D5DC-26F01B472146}</Project>
-      <Name>UniGLTF.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="MToon.Editor.csproj">
-      <Project>{038C4494-E314-AEE9-109F-75E612C6A4CE}</Project>
-      <Name>MToon.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniHumanoid.Editor.csproj">
-      <Project>{9E7097AF-6B2C-488D-7C56-A556BA58533A}</Project>
-      <Name>UniHumanoid.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="VRM.csproj">
-      <Project>{C5809478-E5BE-E355-8D6E-AB0639F1755E}</Project>
-      <Name>VRM</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Input_Editor.csproj">
       <Project>{D4650411-6BCC-6961-DB64-184AE64ECC40}</Project>
@@ -713,25 +679,9 @@
       <Project>{8CA37799-F550-11ED-98BB-912BDBA01394}</Project>
       <Name>SteamVR_Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="UniVRM.Editor.csproj">
-      <Project>{54B5A318-3AF5-CC79-CFF2-75FE62174182}</Project>
-      <Name>UniVRM.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniUnlit.csproj">
-      <Project>{AFA1DBB2-2232-2EDE-9BFF-5FE5FCF25932}</Project>
-      <Name>UniUnlit</Name>
-    </ProjectReference>
     <ProjectReference Include="SteamVR.csproj">
       <Project>{D0B4E51C-BA1A-5FCB-F2E9-159179083C75}</Project>
       <Name>SteamVR</Name>
-    </ProjectReference>
-    <ProjectReference Include="MToon.csproj">
-      <Project>{B049DAE0-4689-6582-BB2C-058D909163B8}</Project>
-      <Name>MToon</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShaderProperty.Runtime.csproj">
-      <Project>{02B97B90-4768-F814-30C5-560AD79E441A}</Project>
-      <Name>ShaderProperty.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
       <Project>{73A61534-F233-5444-3FF8-29BE3DFB0C93}</Project>
