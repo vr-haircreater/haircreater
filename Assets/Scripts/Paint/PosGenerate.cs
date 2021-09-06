@@ -103,5 +103,44 @@ public class PosGenerate : MonoBehaviour
         GetUpdatePointPos.AddRange(TempPoint);
 
     }
+    public void WaveHairStyle(List<Vector3> GetPointPos, int range, int thickness)
+    {
+        TempPoint.Clear();
+        float w1 = range * 0.005f / (GetPointPos.Count / 2);
+        float w = range * 0.005f * 0.2f;
+        float t = thickness * 0.002f;
+        float waveSize = 0.001f;
+
+        float angle = -Mathf.PI;
+
+        for (int i = 0; i < GetPointPos.Count; i++)
+        {
+            float y = Mathf.Sin(angle);
+            if (i == 0)
+            {
+                Vector3 temp = new Vector3(GetPointPos[i].x, GetPointPos[i].y, GetPointPos[i].z + waveSize * y);
+                for (int j = 0; j < 4; j++) TempPoint.Add(temp);
+            }
+            else
+            {
+                Vector3 temp = new Vector3(GetPointPos[i].x, GetPointPos[i].y, GetPointPos[i].z + waveSize * y);
+                TempPoint.Add(temp - cross1 * w);
+                TempPoint.Add(temp + cross2 * t);
+                TempPoint.Add(temp + cross1 * w);
+                TempPoint.Add(temp - cross2 * t);
+
+            }
+            //if (w < range * 0.005f) w += w1;
+            if (w < range * 0.005f && i < GetPointPos.Count / 2) w += w1;
+            else if (i > GetPointPos.Count / 2) w -= w1;
+            if (waveSize < 0.03f && i % 7 == 0) waveSize += 0.01f;
+            //if (i > GetPointPos.Count - 5) waveSize = 0.01f;
+            angle += 0.9f;
+        }
+
+        GetUpdatePointPos.Clear();
+        GetUpdatePointPos.AddRange(TempPoint);
+    }
+
 }
 

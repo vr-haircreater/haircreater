@@ -7,7 +7,7 @@ public class CreateHair : MonoBehaviour
     int TriggerDown = 0;  //沒被按下
     int HairCounter = 0; //Hair片數
     public static int HairWidth = 1;//髮片寬度
-    public static int HairStyleState = 2;//髮片風格選擇
+    public static int HairStyleState = 3;//髮片風格選擇
 
     float length = 0.025f; //點距離，原本0.05
     public int InputRange = 1;//(寬度Range 1~10)
@@ -30,6 +30,7 @@ public class CreateHair : MonoBehaviour
     public SteamVR_Action_Boolean spawn = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
 
     public Texture HairTexture, HairNormal;
+    public GameObject HairModelG,HairModelB;
 
 
     //undo & redo
@@ -41,6 +42,8 @@ public class CreateHair : MonoBehaviour
     {
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
         redoObject = new GameObject();
+        HairModelG = GameObject.Find("GirlSit/HairModelG");
+        HairModelB = GameObject.Find("BoySit/HairModelB");
     }
 
     private void Start()
@@ -52,14 +55,16 @@ public class CreateHair : MonoBehaviour
 
     void Update()
     {
+  
         Control();
         if (TriggerDown == 0 && Gather1.icon == 1) //沒被按下
         {
-            if (TriggerClick.GetStateDown(Pose.inputSource) && Gather1.GridState == true) //偵測被按下的瞬間
+            if (TriggerClick.GetStateDown(Pose.inputSource) && Gather1.icon == 1) //偵測被按下的瞬間
             {
                 GameObject Model = new GameObject(); //創建model gameobj
                 HairModel.Add(Model); //加入list
-                HairModel[HairCounter].name = "HairModel" + HairCounter; //設定名字
+                Model.transform.SetParent(HairModelG.transform);//還需要判定到底是做男做女
+                HairModel[HairCounter].name = "HairModel" + HairCounter; //設定名字 
                 OldPos = NewPos = Pose.transform.position;
                 PointPos.Add(OldPos);
                 undo = 0;
@@ -83,6 +88,7 @@ public class CreateHair : MonoBehaviour
                 //PosCreater.GetPosition(OldPos, NewPos, InputRange);
                 if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange, InputRangeThickness);
                 if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange, InputRangeThickness);
+                if (HairStyleState == 3) PosCreater.WaveHairStyle(PointPos, InputRange, InputRangeThickness);
                 OldPos = NewPos;
             }
 
@@ -124,6 +130,7 @@ public class CreateHair : MonoBehaviour
 
         if (Input.GetKeyDown("1")) HairStyleState = 1;
         if (Input.GetKeyDown("2")) HairStyleState = 2;
+        if (Input.GetKeyDown("3")) HairStyleState = 3;
 
         if (Input.GetKeyDown("u"))
         {

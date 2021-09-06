@@ -66,6 +66,8 @@
     <Compile Include="Assets\FlexibleColorPicker\ExampleScene\FCP_ExampleScript.cs" />
     <Compile Include="Assets\FlexibleColorPicker\Scripts\FCP_SpriteMeshEditor.cs" />
     <Compile Include="Assets\FlexibleColorPicker\Scripts\FlexibleColorPicker.cs" />
+    <Compile Include="Assets\Scripts\Canvas_Pointer\VRInputModule.cs" />
+    <Compile Include="Assets\Scripts\Canvas_Pointer\pointer.cs" />
     <Compile Include="Assets\Scripts\Gather\FollowTarget.cs" />
     <Compile Include="Assets\Scripts\Gather\Gather1.cs" />
     <Compile Include="Assets\Scripts\Gather\InteractableContrallor.cs" />
@@ -79,7 +81,15 @@
     <Compile Include="Assets\Scripts\Paint\MeshGenerate.cs" />
     <Compile Include="Assets\Scripts\Paint\PosGenerate.cs" />
     <Compile Include="Assets\Scripts\ShowControl\ShowControl.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\InteractableA.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\Pointer.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\Removable.cs" />
+    <Compile Include="Assets\Scripts\TryFunctions\SliderControl.cs" />
     <Compile Include="Assets\Scripts\TryFunctions\functions.cs" />
+    <Compile Include="Assets\Scripts\UI\CallerPad.cs" />
+    <Compile Include="Assets\Scripts\UI\ColorPicker_control.cs" />
+    <Compile Include="Assets\Scripts\UI\ColorPicker_h.cs" />
+    <Compile Include="Assets\Scripts\UI\ColorPicker_sv.cs" />
     <None Include="Assets\Scripts\Mirror\MirrorTest3.shader" />
     <None Include="Assets\Scripts\Mirror\Mirror.shader" />
     <None Include="Assets\FlexibleColorPicker\Materials\FCP_Gradient.shader" />
