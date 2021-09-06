@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3f2db2b9b68a6e547972827f1f60b032
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - MeshCreater: {instanceID: 0}
+  - PosCreater: {instanceID: 0}
+  - HairTexture: {fileID: 2800000, guid: dedece71ed088d6468a60e5dbd88f9ff, type: 3}
+  - HairNormal: {fileID: 2800000, guid: 326881d9df931744dbe5281ae06ef683, type: 3}
+  - attachPoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
