@@ -11,8 +11,8 @@ public class CreateHair : MonoBehaviour
 
     float length = 0.025f; //點距離，原本0.05
     public int InputRange = 1;//(寬度Range 1~10)
-    public int InputRangeThickness = 5; //(厚度Range 1~10)
-    public float TwistCurve = 0.5f;
+    public int InputRangeThickness = 1; //(厚度Range 1~10)
+    public float TwistCurve = 0.9f;
     public float WaveCurve = 0.9f;
 
     Vector3 NewPos, OldPos; //抓新舊點
@@ -46,8 +46,8 @@ public class CreateHair : MonoBehaviour
     {
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
         redoObject = new GameObject();
-        HairModelG = GameObject.Find("GirlSit/HairModelG");
-        HairModelB = GameObject.Find("BoySit/HairModelB");
+        HairModelG = GameObject.Find("Girl_Sit/HairModelG");
+        HairModelB = GameObject.Find("Boy_Sit/HairModelB");
     }
 
     private void Start()
@@ -60,12 +60,13 @@ public class CreateHair : MonoBehaviour
     void Update()
     {
         AimHairG = Vector3.Distance(HairModelG.transform.position, Pose.transform.position);
-
+        
         Control();
         if (TriggerDown == 0 && Gather1.icon == 1) //沒被按下
         {
-            if (TriggerClick.GetStateDown(Pose.inputSource) && AimHairG < 1f) //偵測被按下的瞬間
+            if (TriggerClick.GetStateDown(Pose.inputSource)) //偵測被按下的瞬間
             {
+                Debug.Log("Aim:" + AimHairG);
                 GameObject Model = new GameObject(); //創建model gameobj
                 HairModel.Add(Model); //加入list
                 Model.transform.SetParent(HairModelG.transform);//還需要判定到底是做男做女
@@ -93,7 +94,7 @@ public class CreateHair : MonoBehaviour
                 //PosCreater.GetPosition(OldPos, NewPos, InputRange);
                 if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange, InputRangeThickness);
                 if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange, InputRangeThickness);
-                if (HairStyleState == 3) PosCreater.WaveHairStyle(PointPos, InputRange, InputRangeThickness);
+                if (HairStyleState == 3) PosCreater.WaveHairStyle(PointPos, InputRange, InputRangeThickness, WaveCurve);
                 if (HairStyleState == 4) PosCreater.TwistHairStyle(PointPos, InputRange, InputRangeThickness, TwistCurve);
                 OldPos = NewPos;
             }
