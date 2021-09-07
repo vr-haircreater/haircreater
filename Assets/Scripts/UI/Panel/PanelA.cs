@@ -12,7 +12,7 @@ public class PanelA : MonoBehaviour
     void Awake()
     {
         /*btns[0] = GameObject.Find("Canvas/PanelA/upper_button/Button0");*/
-        theColor = GetComponent<Button>().colors;
+        //theColor = GetComponent<Button>().colors; 佔關有錯誤 wendy
     }
     
     void Start()

@@ -12,6 +12,8 @@ public class CreateHair : MonoBehaviour
     float length = 0.025f; //點距離，原本0.05
     public int InputRange = 1;//(寬度Range 1~10)
     public int InputRangeThickness = 5; //(厚度Range 1~10)
+    public float TwistCurve = 0.5f;
+    public float WaveCurve = 0.9f;
 
     Vector3 NewPos, OldPos; //抓新舊點
 
@@ -31,6 +33,8 @@ public class CreateHair : MonoBehaviour
 
     public Texture HairTexture, HairNormal;
     public GameObject HairModelG,HairModelB;
+    float AimHairG;
+
 
 
     //undo & redo
@@ -55,11 +59,12 @@ public class CreateHair : MonoBehaviour
 
     void Update()
     {
-  
+        AimHairG = Vector3.Distance(HairModelG.transform.position, Pose.transform.position);
+
         Control();
         if (TriggerDown == 0 && Gather1.icon == 1) //沒被按下
         {
-            if (TriggerClick.GetStateDown(Pose.inputSource) && Gather1.icon == 1) //偵測被按下的瞬間
+            if (TriggerClick.GetStateDown(Pose.inputSource) && AimHairG < 1f) //偵測被按下的瞬間
             {
                 GameObject Model = new GameObject(); //創建model gameobj
                 HairModel.Add(Model); //加入list
@@ -89,6 +94,7 @@ public class CreateHair : MonoBehaviour
                 if (HairStyleState == 1) PosCreater.Straight_HairStyle(PointPos, InputRange, InputRangeThickness);
                 if (HairStyleState == 2) PosCreater.Dimand_HairStyle(PointPos, InputRange, InputRangeThickness);
                 if (HairStyleState == 3) PosCreater.WaveHairStyle(PointPos, InputRange, InputRangeThickness);
+                if (HairStyleState == 4) PosCreater.TwistHairStyle(PointPos, InputRange, InputRangeThickness, TwistCurve);
                 OldPos = NewPos;
             }
 
@@ -131,6 +137,13 @@ public class CreateHair : MonoBehaviour
         if (Input.GetKeyDown("1")) HairStyleState = 1;
         if (Input.GetKeyDown("2")) HairStyleState = 2;
         if (Input.GetKeyDown("3")) HairStyleState = 3;
+        if (Input.GetKeyDown("4")) HairStyleState = 4;
+
+        if (Input.GetKeyDown("s") && WaveCurve > 0.2f) WaveCurve -= 0.1f;
+        if (Input.GetKeyDown("w") && WaveCurve < 0.8f) WaveCurve += 0.1f;
+        if (Input.GetKeyDown("a") && TwistCurve > 0.5f) TwistCurve -= 0.1f;
+        if (Input.GetKeyDown("d") && TwistCurve < 0.8f) TwistCurve += 0.1f;//越大越捲
+
 
         if (Input.GetKeyDown("u"))
         {
