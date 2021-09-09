@@ -3,14 +3,13 @@ Graduation Project
 
 介紹
 ---
-- [haircreater_github](https://github.com/vr-haircreater)
-- [組員介紹](https://hackmd.io/@YunTseng/introduce)
-- [Pictures](https://hackmd.io/@YunTseng/pictures)
+- [組員介紹](https://hackmd.io/@MCU110CCE/introduce)
+- [Pictures](https://hackmd.io/@MCU110CCE/pictures)
 
 前置作業
 ---
-- [開會紀錄](https://hackmd.io/@YunTseng/meeting_record)
-- [遇到的問題](https://hackmd.io/@YunTseng/todo)
+- [開會紀錄](https://hackmd.io/@MCU110CCE/meeting-record)
+- [遇到的問題](https://hackmd.io/@MCU110CCE/pre-work)
 
 相關文獻
 ---
@@ -27,20 +26,22 @@ Graduation Project
 
 位置抓取
 ---
-- [VR coordinate_1](https://hackmd.io/@YunTseng/VR_coordinate_1)
-- [VR coordinate_2](https://hackmd.io/@YunTseng/VR_coordinate_2)
+- [VR coordinate_1](https://hackmd.io/@MCU110CCE/VR_coordinate_1)
+- [VR coordinate_2](https://hackmd.io/@MCU110CCE/VR_coordinate_2)
 
 髮片生成
 ---
-- [Mesh](https://hackmd.io/@YunTseng/MeshRefference)
-- [實作Mesh髮片(滑鼠模擬)](https://hackmd.io/@YunTseng/MeshHair)
+- [Mesh](https://hackmd.io/@MCU110CCE/MeshModel_Reference)
+- [實作Mesh髮片(滑鼠模擬)](https://hackmd.io/@MCU110CCE/MeshModel_work)
 
 UI介面
 ---
-- [UI_Try1](https://hackmd.io/@YunTseng/UI_Try1)
+- [UI_Try1](https://hackmd.io/@MCU110CCE/UI_part1)
+- [UI_Try2](https://hackmd.io/@MCU110CCE/UI_part2)
 
 製作成果
 ---
-- [VR HairCreater](https://hackmd.io/@YunTseng/VR_HairCreater)
+- [haircreater_github](https://github.com/vr-haircreater)
 
-###### tags: `sort`、`Graduation_Project`
+
+###### tags: `publish`
