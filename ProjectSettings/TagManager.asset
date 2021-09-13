@@ -21,6 +21,8 @@ TagManager:
   - button10
   - button11
   - showimage
+  - slider1img
+  - Gslider1
   layers:
   - Default
   - TransparentFX

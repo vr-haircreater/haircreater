@@ -23,7 +23,7 @@ public class VRInputModule : BaseInputModule
     {
         //Reset data, set camera
         m_Data.Reset();
-        m_Data.position = new Vector2(m_Camera.pixelWidth / 2, m_Camera.pixelHeight / 2);
+        m_Data.position = new Vector2(m_Camera.pixelWidth / 2 , m_Camera.pixelHeight / 2 );
         //Raycast
         eventSystem.RaycastAll(m_Data, m_RaycastResultCache);
         m_Data.pointerCurrentRaycast = FindFirstRaycast(m_RaycastResultCache);

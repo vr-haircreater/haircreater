@@ -22,15 +22,12 @@ public class Gather1 : MonoBehaviour
     public SteamVR_Action_Boolean TriggerClick = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");//板機鍵按鈕
     public SteamVR_Action_Boolean m_Grip = null;
 
-    public FlexibleColorPicker cpicker;
-    public static Material cpicker_material;
-
- 
+    
 
     void Awake()
     {
         RightHand = GameObject.Find("Player/SteamVRObjects/RightHand");
-        cpicker_material = Resources.Load<Material>("Materials/forCanvas");
+        //cpicker_material = Resources.Load<Material>("Materials/forCanvas");
         Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
 
@@ -49,7 +46,7 @@ public class Gather1 : MonoBehaviour
     void Update()
     {
         //Debug.Log("右:"+ Pose.transform.position);
-        cpicker_material.color = cpicker.color;
+        //cpicker_material.color = cpicker.color;
         if (icon == 1) //Paint
         {
             if (m_Grip.GetStateDown(Pose.inputSource)) Drop();

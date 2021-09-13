@@ -9,7 +9,7 @@ using Valve.VR;
 public class MPointer : MonoBehaviour
 {
     public SteamVR_LaserPointer LaserPointer;
-    public SteamVR_Input_Source ;
+    //public SteamVR_Input_Source ;
     Hand hand;
     void Awake()
     {
@@ -28,7 +28,7 @@ public class MPointer : MonoBehaviour
     {
         //hand.TriggerHapticPulse(500);
         //SteamVR_Actions._default.Haptic.active = false;
-        SteamVR_Actions.default_Haptic.AddOnExecuteListener(null, LaserPointer.fromInputSource);
+        //SteamVR_Actions.default_Haptic.AddOnExecuteListener(null, LaserPointer.fromInputSource);
     }
 
     public void PointerClick(object sender, PointerEventArgs e)
