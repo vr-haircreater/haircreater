@@ -1,6 +1,9 @@
 Graduation Project
 ===
 
+
+[![hackmd-github-sync-badge](https://hackmd.io/Jd3qYttMS_CPxGW_qPHN6g/badge)](https://hackmd.io/Jd3qYttMS_CPxGW_qPHN6g)
+
 介紹
 ---
 - [組員介紹](https://hackmd.io/@MCU110CCE/introduce)
